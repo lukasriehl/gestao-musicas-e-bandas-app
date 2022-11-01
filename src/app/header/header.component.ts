@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WebStorageUtil } from 'src/app/util/web-storage-util';
+import { Constants } from './../util/constants';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  usuario: string
+
+  constructor() {
+    //this.usuario = WebStorageUtil.get(Constants.USERNAME_KEY);
+    this.usuario = 'Lukas';
+  }
 
   ngOnInit(): void {
   }

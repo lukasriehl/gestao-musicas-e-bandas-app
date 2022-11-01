@@ -1,18 +1,19 @@
 <!-- menu -->
 <div class="navbar-fixed" style="z-index: 1001 !important">
   <nav>
-    <div class="nav-wrapper accent-4">
+    <div class="nav-wrapper blue accent-4">
       <div class="container">
-        <!--<a class="brand-logo" href="#">
+        <a class="brand-logo" href="#">
           <img class="my-logo" src="assets/resources/images/logo.png" />
-        </a>-->
+        </a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
         <ul class="right hide-on-med-and-down">
-          <li><a routerLink="/home" class="flow-text">Bandas</a></li>
-          <li><a [routerLink]="['/home']" class="flow-text">Músicas</a></li>
-          <li><a [routerLink]="'/home'" class="flow-text">Sair</a></li>
+          <li><a [routerLink]="['/bandas']" class="flow-text">Bandas</a></li>
+          <li><a [routerLink]="['/musicas']" class="flow-text">Músicas</a></li>
+          <li><a [routerLink]="['/home']" class="flow-text">Home</a></li>
+          <li><a [routerLink]="['/login']" class="flow-text">Sair</a></li>
         </ul>
       </div>
     </div>
