@@ -15,6 +15,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BandasComponent } from './bandas/bandas.component';
 import { MusicasComponent } from './musicas/musicas.component';
+import { ManutBandasComponent } from './manut-bandas/manut-bandas.component';
+import { ManutMusicasComponent } from './manut-musicas/manut-musicas.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { ModalComponent } from './modal/modal.component';
+import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { MusicasComponent } from './musicas/musicas.component';
     LoginComponent,
     PageNotFoundComponent,
     BandasComponent,
-    MusicasComponent
+    MusicasComponent,
+    ManutBandasComponent,
+    ManutMusicasComponent,
+    NotAuthorizedComponent,
+    ModalComponent,
+    PlaylistPanelComponent
   ],
   imports: [
     BrowserModule,

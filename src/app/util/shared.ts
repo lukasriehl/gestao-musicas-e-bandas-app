@@ -18,10 +18,6 @@ export class Shared {
 
     localStorage.setItem(Constants.USERNAME_KEY, JSON.stringify(user));
     localStorage.setItem(Constants.USERS_KEY, JSON.stringify([]));
-    localStorage.setItem(Constants.COSTS_KEY, String(0));
     localStorage.setItem(Constants.LOGGED_IN_KEY, String(false));
-
-    localStorage.removeItem(Constants.DONATION_KEY);
-    localStorage.setItem(Constants.DONATION_KEY, JSON.stringify([]));
   }
 }

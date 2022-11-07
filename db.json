@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "lukas.riehl",
+      "password": "qwerty",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "username": "renato.riehl",
+      "password": "qwerty",
+      "isAdmin": false
+    }
+  ]
+}

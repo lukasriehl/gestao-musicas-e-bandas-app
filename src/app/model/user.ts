@@ -1,3 +1,5 @@
+import { Playlist } from "./playlist";
+
 export class User {
   id!: string;
   name?: string;
@@ -5,14 +7,14 @@ export class User {
   password: string;
   cpf?: string;
   birthday?: Date;
-  balance: number;
   isAdmin: boolean;
+  playlist: Playlist;
   constructor(username: string, password: string, isAdmin: boolean = false) {
     this.id = String(Math.round(Math.random() * 1000));
     this.username = username;
     this.password = password;
-    this.balance = 0;
     this.isAdmin = isAdmin;
+    this.playlist = new Playlist('');
   }
 
   public static clone(user: User) {
@@ -20,7 +22,6 @@ export class User {
     u.name = user.name;
     u.cpf = user.cpf;
     u.birthday = user.birthday;
-    u.balance = user.balance;
     return u;
   }
 
@@ -34,7 +35,6 @@ export class User {
     u.name = user.name;
     u.cpf = user.cpf;
     u.birthday = user.birthday;
-    u.balance = user.balance;
     return u;
   }
 }

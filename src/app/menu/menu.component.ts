@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   onLogout() {
-    //this.loggedIn = false;
+    this.loggedIn = false;
     this.loginService.logout();
   }
 

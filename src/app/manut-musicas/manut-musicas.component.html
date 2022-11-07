@@ -1,0 +1,83 @@
+<div style="width: 400px; margin: auto">
+  <h5>Manutenção de Músicas</h5>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="music.name"
+          name="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="band">Banda</label>
+        <input
+          type="text"
+          class="form-control"
+          id="band"
+          required
+          [(ngModel)]="music.bandId"
+          name="band"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gênero</label>
+        <input
+          class="form-control"
+          id="gender"
+          [(ngModel)]="music.gender"
+          name="gender"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="releaseYear">Ano de Lançamento</label>
+        <input
+          class="form-control"
+          id="releaseYear"
+          [(ngModel)]="music.releaseYear"
+          name="releaseYear"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="cdName">CD</label>
+        <input
+          class="form-control"
+          id="cdName"
+          [(ngModel)]="music.cdName"
+          name="cdName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="link">Link</label>
+        <input
+          class="form-control"
+          id="link"
+          [(ngModel)]="music.link"
+          name="link"
+        />
+      </div>
+
+      <button
+        class="btn waves-effect waves-light blue darken-4"
+        (click)="saveMusic()"
+      >
+        Salvar
+        <i class="material-icons save">save</i>
+      </button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Música incluida/alterada com sucesso!</h4>
+      <button class="btn btn-success" (click)="newMusic()">Nova</button>
+    </div>
+  </div>
+</div>

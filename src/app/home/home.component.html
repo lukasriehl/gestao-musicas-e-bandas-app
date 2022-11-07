@@ -1,1 +1,17 @@
-<p>Componente Home em Construção!</p>
+<app-modal [show]="modal.show" [content]="modal" (closeEvent)="onCloseModal()">
+</app-modal>
+
+<div
+  class="intro amber z-depth-1 my-logo-text"
+  [ngStyle]="this.getBackgroundImage()"
+>
+  <h1 class="grey-text text-lighten-5">GESTÃO DE MÚSICAS E BANDAS</h1>
+
+  <div class="container">
+    <app-playlist-panel
+      #playlist
+      [value]="this.user.playlist"
+      (playlistWarnEvent)="this.onPlaylistWarnEvent($event)"
+    ></app-playlist-panel>
+  </div>
+</div>

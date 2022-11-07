@@ -1,0 +1,15 @@
+<div class="modal" #modal1>
+  <div class="modal-content">
+    <h4>{{ content?.title }}</h4>
+    <p>{{ content?.text }}</p>
+    <a routerLink="/{{ content?.extraLink }}">Acessar</a>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="modal-close waves-effect waves-blue btn-flat"
+      (click)="onClose()"
+    >
+      Ok
+    </button>
+  </div>
+</div>

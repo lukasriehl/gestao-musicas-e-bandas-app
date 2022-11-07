@@ -1,5 +1,7 @@
 <div>
-  <h5>Músicas</h5>
+  <h5>Playlist {{ this.name }}</h5>
+  <hr />
+  <h6>Músicas</h6>
 
   <div class="row">
     <div class="col s12 m6 offset-m3">
@@ -15,12 +17,8 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let m of this.musics">
-            <td>
-              <a [title]="m.name" [routerLink]="['/manutMusicas', m.id]">
-                {{ m.name }}
-              </a>
-            </td>
+          <tr *ngFor="let m of this.value.musics">
+            <td>{{ m.name }}</td>
             <td>{{ m.gender }}</td>
             <td>{{ m.releaseYear }}</td>
             <td>{{ m.cdName }}</td>

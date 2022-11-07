@@ -9,11 +9,13 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
-        <ul class="right hide-on-med-and-down">
+        <ul class="right hide-on-med-and-down" [hidden]="!this.loggedIn">
           <li><a [routerLink]="['/bandas']" class="flow-text">Bandas</a></li>
           <li><a [routerLink]="['/musicas']" class="flow-text">Músicas</a></li>
           <li><a [routerLink]="['/home']" class="flow-text">Home</a></li>
-          <li><a [routerLink]="['/login']" class="flow-text">Sair</a></li>
+          <li>
+            <a class="flow-text" (click)="onLogout()">Sair</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -23,12 +25,21 @@
     <div class="row">
       <div class="col s8 offset-s2">
         <div class="center">
-          <!--<img
+          <<img
             class="circle responsive-img"
             src="assets/resources/images/logo.png"
-          />-->
+          />
         </div>
       </div>
+    </div>
+    <div *ngIf="this.loggedIn">
+      <li><a [routerLink]="['/bandas']" class="flow-text">Bandas</a></li>
+      <li><a [routerLink]="['/musicas']" class="flow-text">Músicas</a></li>
+      <li><a [routerLink]="['/home']" class="flow-text">Home</a></li>
+      <li><a [routerLink]="['/login']" class="flow-text">Sair</a></li>
+      <li>
+        <a class="flow-text" (click)="onLogout()">Sair</a>
+      </li>
     </div>
   </ul>
 </div>

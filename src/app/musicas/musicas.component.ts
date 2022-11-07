@@ -1,3 +1,4 @@
+import { musics } from './../model/music';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./musicas.component.css']
 })
 export class MusicasComponent implements OnInit {
+  musics = musics;
 
   constructor() { }
 
