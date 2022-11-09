@@ -1,83 +1,114 @@
-<div style="width: 400px; margin: auto">
-  <h5>Manutenção de Músicas</h5>
-  <div class="submit-form">
-    <div *ngIf="!submitted">
-      <div class="form-group">
-        <label for="name">Nome</label>
+<div class="container contact">
+  <h5>Cadastro de Músicas</h5>
+  <hr />
+  <div class="row">
+    <div class="col s12">
+      <div
+        id="msg-login"
+        class="card-panel white-text"
+        [class.red]="!this.isSuccess"
+        [class.blue]="this.isSuccess"
+        *ngIf="this.isShowMessage"
+      >
+        {{ this.message }}
+      </div>
+    </div>
+    <form class="col s12" #form="ngForm" (submit)="onSubmit()">
+      <div class="input-field col s12">
         <input
+          id="input-name"
+          name="input-name"
           type="text"
-          class="form-control"
-          id="name"
+          class="validate"
+          [(ngModel)]="this.music.name"
+          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          #name="ngModel"
           required
-          [(ngModel)]="music.name"
-          name="name"
         />
+        <label for="input-name">Nome *</label>
+        <div class="red-text" [hidden]="name.valid || name.untouched">
+          Por favor, informe o nome da música.
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="band">Banda</label>
+      <div class="input-field col s12">
         <input
+          id="input-releaseyear"
+          name="input-releaseyear"
           type="text"
-          class="form-control"
-          id="band"
+          class="validate"
+          [(ngModel)]="this.music.releaseYear"
+          pattern="^\d{4}$"
+          #releaseYear="ngModel"
           required
-          [(ngModel)]="music.bandId"
-          name="band"
         />
+        <label for="input-releaseyear">Ano de Lançamento *</label>
+        <div
+          class="red-text"
+          [hidden]="releaseYear.valid || releaseYear.untouched"
+        >
+          Por favor, informe o ano de lançamento da música (4 algarismos).
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="gender">Gênero</label>
-        <input
-          class="form-control"
-          id="gender"
-          [(ngModel)]="music.gender"
-          name="gender"
-        />
+      <div class="input-field col s12 l6">
+        <label for="select-band" class="active">Banda *</label>
+        <select
+          id="select-band"
+          name="select-band"
+          [(ngModel)]="this.music.band"
+          #band="ngModel"
+          #bandSelect
+          required
+        >
+          <option [ngValue]="{}" disabled>Selecione uma banda</option>
+          <option *ngFor="let b of this.bands" [ngValue]="b">
+            {{ b.name }}
+          </option>
+        </select>
+        <div class="red-text" [hidden]="band.valid || band.untouched">
+          Por favor, informe a banda
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="releaseYear">Ano de Lançamento</label>
+      <div class="input-field col s12">
         <input
-          class="form-control"
-          id="releaseYear"
-          [(ngModel)]="music.releaseYear"
-          name="releaseYear"
+          id="input-cdname"
+          name="input-cdname"
+          type="text"
+          class="validate"
+          [(ngModel)]="this.music.cdName"
+          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          #cdName="ngModel"
+          required
         />
+        <label for="input-cdname">Nome do CD *</label>
+        <div class="red-text" [hidden]="cdName.valid || cdName.untouched">
+          Por favor, informe o nome do CD.
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="cdName">CD</label>
+      <div class="input-field col s12">
         <input
-          class="form-control"
-          id="cdName"
-          [(ngModel)]="music.cdName"
-          name="cdName"
+          id="input-link"
+          name="input-link"
+          type="text"
+          class="validate"
+          [(ngModel)]="this.music.link"
+          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          #name="ngModel"
         />
-      </div>
-
-      <div class="form-group">
-        <label for="link">Link</label>
-        <input
-          class="form-control"
-          id="link"
-          [(ngModel)]="music.link"
-          name="link"
-        />
+        <label for="input-link">Link</label>
       </div>
 
       <button
-        class="btn waves-effect waves-light blue darken-4"
-        (click)="saveMusic()"
+        class="btn waves-effect waves-light grey darken-4"
+        type="submit"
+        [disabled]="!form.valid"
       >
-        Salvar
-        <i class="material-icons save">save</i>
+        Enviar
+        <i class="material-icons right">send</i>
       </button>
-    </div>
-
-    <div *ngIf="submitted">
-      <h4>Música incluida/alterada com sucesso!</h4>
-      <button class="btn btn-success" (click)="newMusic()">Nova</button>
-    </div>
+    </form>
   </div>
 </div>

@@ -17,7 +17,7 @@ export class LoginService {
 
   login(user:User) {
     WebStorageUtil.set(Constants.LOGGED_IN_KEY, true);
-    //WebStorageUtil.set(Constants.USERNAME_KEY, user);
+    WebStorageUtil.set(Constants.USERNAME_KEY, user);
     console.log(WebStorageUtil.get(Constants.USERNAME_KEY));
     this.loginSource.next(true);
     this.router.navigate(['home']);

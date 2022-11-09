@@ -10,7 +10,7 @@ import { Shared } from './../util/shared';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
   user!: User;
   loggedIn!: Observable<boolean>;
 
@@ -24,11 +24,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     Shared.initializeWebStorage();
     this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
-    this.loggedIn = WebStorageUtil.get(Constants.LOGGED_IN_KEY);
-    console.log('Header component. Logado: ' + this.loggedIn);
-  }
-
-  ngOnChanges(): void {
     this.loggedIn = WebStorageUtil.get(Constants.LOGGED_IN_KEY);
   }
 

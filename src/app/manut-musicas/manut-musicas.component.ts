@@ -1,7 +1,11 @@
+import { BandService } from './../services/band.service';
 import { Music } from '../model/music';
+import { Band } from '../model/band';
 import { MusicService } from './../services/music.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Shared } from '../util/shared';
 
 @Component({
   selector: 'app-manut-musicas',
@@ -9,35 +13,46 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./manut-musicas.component.css']
 })
 export class ManutMusicasComponent implements OnInit {
-  submitted = false;
+  @ViewChild('form') form!: NgForm;
 
-  music: Music;
+  music!: Music;
+  bands: Band[];
 
-  constructor(private route: ActivatedRoute, private musicService: MusicService) {
-    this.music = new Music('', '', '', '');
+  isSubmitted!: boolean;
+  isShowMessage: boolean = false;
+  isSuccess!: boolean;
+  message!: string;
+
+  constructor(private route: ActivatedRoute, private musicService: MusicService,
+    private bandService: BandService) {
+    this.bands = bandService.getBands();
   }
 
   ngOnInit(): void {
+    Shared.initializeWebStorage();
+    this.music = new Music('', '', '');
+
     const routeParams = this.route.snapshot.paramMap;
     const musicId = Number(routeParams.get('musicId'));
 
-    if(musicId === 0 || musicId === undefined){
-      this.newMusic();
-    }else{
-      this.music = new Music('Forever', 'Rock\'n\'Roll',
-      'Hot in the Shade', 'https://www.youtube.com/watch?v=d_RKO5ozLVo');
-      this.music.releaseYear = 1989;
+    if(musicId !== undefined && musicId > 0){
+      let musicToEdit = this.musicService.findById(musicId);
+      this.music = Music.clone(musicToEdit);
     }
   }
 
-  saveMusic(): void {
-
-  }
-
-  newMusic(): void {
-    this.submitted = false;
-
-    this.music = new Music('', '', '', '');
+  onSubmit() {
+    this.isSubmitted = true;
+    if (!this.musicService.isExists(this.music.name)) {
+      this.musicService.save(this.music);
+    } else {
+      this.musicService.update(this.music);
+    }
+    this.isShowMessage = true;
+    this.isSuccess = true;
+    this.message = 'Cadastro realizado com sucesso!';
+    this.form.reset();
+    this.music = new Music('', '', '');
   }
 
 }

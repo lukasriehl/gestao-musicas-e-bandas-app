@@ -1,1 +1,63 @@
-<p>bandas works!</p>
+<div>
+  <h5>Bandas</h5>
+
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <table class="highlight" *ngIf="bands && bands!.length > 0">
+        <thead>
+          <tr>
+            <th data-field="td-value">Nome</th>
+            <th data-field="td-value">Ano Fundação</th>
+            <th data-field="td-value">Estilo</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let b of this.bands">
+            <td>
+              <a [title]="b.name" [routerLink]="['/manutBandas', b.id]">
+                {{ b.name }}
+              </a>
+            </td>
+            <td>{{ b.foundationYear }}</td>
+            <td>{{ b.style }}</td>
+            <td class="right">
+              <a [routerLink]="['/manutBandas', b.id]">
+                <i class="material-icons my-icon-size">edit</i></a
+              >
+              <a
+                ><i
+                  class="material-icons my-icon-size"
+                  (click)="onDelete(b.name)"
+                  >delete</i
+                ></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!bands || bands!.length == 0">
+        <div class="row">
+          <div class="center-align">
+            <i class="col s12 material-icons large">mood_bad</i>
+            <span class="col s12 flow-text"
+              >Ainda não temos bandas cadastradas!</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button
+      class="btn waves-effect waves-light blue darken-4"
+      [routerLink]="['/manutBandas']"
+    >
+      Nova Banda
+      <i class="material-icons add">add</i>
+    </button>
+  </div>
+</div>

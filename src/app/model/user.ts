@@ -22,6 +22,7 @@ export class User {
     u.name = user.name;
     u.cpf = user.cpf;
     u.birthday = user.birthday;
+    u.playlist = user.playlist;
     return u;
   }
 
