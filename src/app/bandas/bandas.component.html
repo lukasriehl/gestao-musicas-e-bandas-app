@@ -21,7 +21,7 @@
               </a>
             </td>
             <td>{{ b.foundationYear }}</td>
-            <td>{{ b.style }}</td>
+            <td>{{ b.style?.name }}</td>
             <td class="right">
               <a [routerLink]="['/manutBandas', b.id]">
                 <i class="material-icons my-icon-size">edit</i></a
@@ -51,13 +51,15 @@
     </div>
   </div>
 
-  <div class="row">
-    <button
-      class="btn waves-effect waves-light blue darken-4"
-      [routerLink]="['/manutBandas']"
-    >
-      Nova Banda
-      <i class="material-icons add">add</i>
-    </button>
+  <div class="row" style="margin-top: 50px">
+    <div class="col s12 m6 offset-m3">
+      <button
+        class="btn waves-effect waves-light blue darken-4"
+        [routerLink]="['/manutBandas']"
+      >
+        Nova Banda
+        <i class="material-icons add">add</i>
+      </button>
+    </div>
   </div>
 </div>

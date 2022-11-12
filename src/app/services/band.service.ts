@@ -12,6 +12,12 @@ export class BandService {
 
   constructor(){
     this.bands = WebStorageUtil.get(Constants.BANDS_KEY);
+
+    if(this.bands === null || this.bands === undefined){
+      this.bands = [];
+
+      WebStorageUtil.set(Constants.BANDS_KEY, this.bands);
+    }
   }
 
   save(band: Band){
@@ -38,6 +44,7 @@ export class BandService {
 
   isExists(value: string): boolean {
     this.bands = WebStorageUtil.get(Constants.BANDS_KEY);
+
     for (let b of this.bands) {
       if (b.name?.valueOf() == value?.valueOf()) {
         return true;
@@ -48,13 +55,14 @@ export class BandService {
 
   findById(id: number): Band {
     this.bands = WebStorageUtil.get(Constants.BANDS_KEY);
+
     for (let b of this.bands) {
       if (b.id?.valueOf() == id?.valueOf()) {
         return b;
       }
     }
 
-    return new Band('', 1900);
+    return new Band('');
   }
 
   getBands(): Band[] {

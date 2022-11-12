@@ -1,7 +1,6 @@
 import { Music } from './../model/music';
 import { MusicService } from './../services/music.service';
 import { Component, OnInit } from '@angular/core';
-import { Music } from '../model/music';
 import { Shared } from '../util/shared';
 
 @Component({

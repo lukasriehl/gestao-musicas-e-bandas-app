@@ -7,7 +7,7 @@
         <tr>
           <th data-field="td-value">Nome</th>
           <th data-field="td-value">Banda</th>
-          <th data-field="td-value">Ano Lanç.</th>
+          <th data-field="td-value">Ano Lançamento</th>
           <th data-field="td-value">CD</th>
           <th data-field="td-value">Link</th>
           <th></th>
@@ -21,10 +21,12 @@
               {{ m.name }}
             </a>
           </td>
-          <td>{{ m.band.name }}</td>
+          <td>{{ m.band?.name }}</td>
           <td>{{ m.releaseYear }}</td>
           <td>{{ m.cdName }}</td>
-          <td>{{ m.link }}</td>
+          <td>
+            <a href="{{ m.link }}" target="_blank">{{ m.link }}</a>
+          </td>
           <td class="right">
             <a [routerLink]="['/manutMusicas', m.id]">
               <i class="material-icons my-icon-size">edit</i></a
@@ -32,6 +34,13 @@
             <a
               ><i class="material-icons my-icon-size" (click)="onDelete(m.name)"
                 >delete</i
+              ></a
+            >
+            <a title="Incluir na Playlist"
+              ><i
+                class="material-icons my-icon-size"
+                (click)="onIncludeOnPlaylist(m)"
+                >add</i
               ></a
             >
           </td>

@@ -18,14 +18,15 @@
         <input
           id="input-name"
           name="input-name"
+          placeholder="Nome"
           type="text"
           class="validate"
           [(ngModel)]="this.music.name"
-          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          pattern="[A-Za-z0-9\s]+"
           #name="ngModel"
           required
         />
-        <label for="input-name">Nome *</label>
+        <label for="input-name" class="active">Nome *</label>
         <div class="red-text" [hidden]="name.valid || name.untouched">
           Por favor, informe o nome da música.
         </div>
@@ -35,6 +36,7 @@
         <input
           id="input-releaseyear"
           name="input-releaseyear"
+          placeholder="Ano de Lançamento"
           type="text"
           class="validate"
           [(ngModel)]="this.music.releaseYear"
@@ -42,7 +44,9 @@
           #releaseYear="ngModel"
           required
         />
-        <label for="input-releaseyear">Ano de Lançamento *</label>
+        <label for="input-releaseyear" class="active"
+          >Ano de Lançamento *</label
+        >
         <div
           class="red-text"
           [hidden]="releaseYear.valid || releaseYear.untouched"
@@ -51,23 +55,26 @@
         </div>
       </div>
 
-      <div class="input-field col s12 l6">
-        <label for="select-band" class="active">Banda *</label>
-        <select
-          id="select-band"
-          name="select-band"
-          [(ngModel)]="this.music.band"
-          #band="ngModel"
-          #bandSelect
-          required
-        >
-          <option [ngValue]="{}" disabled>Selecione uma banda</option>
-          <option *ngFor="let b of this.bands" [ngValue]="b">
-            {{ b.name }}
-          </option>
-        </select>
-        <div class="red-text" [hidden]="band.valid || band.untouched">
-          Por favor, informe a banda
+      <div class="row" style="margin-left: auto">
+        <div class="input-field col s12">
+          <label for="select-band" class="active">Banda *</label>
+          <select
+            id="select-band"
+            name="select-band"
+            [(ngModel)]="this.music.band"
+            [compareWith]="this.compareBands"
+            #band="ngModel"
+            #bandSelect
+            required
+          >
+            <option [ngValue]="{}" disabled>Selecione uma banda</option>
+            <option *ngFor="let b of this.bands" [ngValue]="b">
+              {{ b.name }}
+            </option>
+          </select>
+          <div class="red-text" [hidden]="band.valid || band.untouched">
+            Por favor, informe a banda
+          </div>
         </div>
       </div>
 
@@ -75,14 +82,15 @@
         <input
           id="input-cdname"
           name="input-cdname"
+          placeholder="Nome do CD"
           type="text"
           class="validate"
           [(ngModel)]="this.music.cdName"
-          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          pattern="[A-Za-z0-9\s]+"
           #cdName="ngModel"
           required
         />
-        <label for="input-cdname">Nome do CD *</label>
+        <label for="input-cdname" class="active">Nome do CD *</label>
         <div class="red-text" [hidden]="cdName.valid || cdName.untouched">
           Por favor, informe o nome do CD.
         </div>
@@ -92,13 +100,18 @@
         <input
           id="input-link"
           name="input-link"
+          placeholder="Link"
           type="text"
           class="validate"
           [(ngModel)]="this.music.link"
-          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
-          #name="ngModel"
+          pattern="^https?\:\/\/[A-Za-z0-9./_&=?]+"
+          #link="ngModel"
+          required
         />
-        <label for="input-link">Link</label>
+        <label for="input-link" class="active">Link</label>
+        <div class="red-text" [hidden]="link.valid || link.untouched">
+          Por favor, informe um link.
+        </div>
       </div>
 
       <button
@@ -106,7 +119,7 @@
         type="submit"
         [disabled]="!form.valid"
       >
-        Enviar
+        Salvar
         <i class="material-icons right">send</i>
       </button>
     </form>

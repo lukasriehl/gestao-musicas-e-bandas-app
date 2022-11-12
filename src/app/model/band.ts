@@ -2,21 +2,22 @@ import { Style } from './style';
 import { Member } from "./member";
 
 export class Band {
-  public id: number;
-  public name: string;
-  public foundationYear: number;
-  public style?: Style;
+  public id?: number;
+  public foundationYear?: number;
   public members: Member[];
-  constructor(name: string, foundationYear: number) {
+  constructor(public name: string, public style?: Style) {
     this.id = Math.round(Math.random() * 1000);
-    this.name = name;
-    this.foundationYear = foundationYear;
+
+    if (style == undefined) {
+      this.style = new Style({});
+    }
+
     this.members = [];
   }
 
   public static clone(band: Band) {
-    let b: Band = new Band(band.name, band.foundationYear)
-    b.style = band.style;
+    let b: Band = new Band(band.name, new Style(band.style))
+    b.foundationYear = band.foundationYear;
     b.members = band.members;
     return b;
   }

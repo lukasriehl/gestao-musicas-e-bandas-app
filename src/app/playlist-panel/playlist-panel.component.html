@@ -9,9 +9,7 @@
         <thead>
           <tr>
             <th data-field="td-value">Nome</th>
-            <th data-field="td-value">Gênero</th>
-            <th data-field="td-value">Ano Lanç.</th>
-            <th data-field="td-value">CD</th>
+            <th data-field="td-value">Banda</th>
             <th data-field="td-value">Link</th>
           </tr>
         </thead>
@@ -19,9 +17,7 @@
         <tbody>
           <tr *ngFor="let m of this.value.musics">
             <td>{{ m.name }}</td>
-            <td>{{ m.gender }}</td>
-            <td>{{ m.releaseYear }}</td>
-            <td>{{ m.cdName }}</td>
+            <td>{{ m.band?.name }}</td>
             <td>{{ m.link }}</td>
           </tr>
         </tbody>

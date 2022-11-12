@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'bandas', component: BandasComponent},
   { path: 'musicas', component: MusicasComponent},
   { path: 'manutBandas', component: ManutBandasComponent},
+  { path: 'manutBandas/:bandId', component: ManutBandasComponent },
   { path: 'manutMusicas', component: ManutMusicasComponent},
   { path: 'manutMusicas/:musicId', component: ManutMusicasComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },

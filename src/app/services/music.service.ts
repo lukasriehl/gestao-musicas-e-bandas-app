@@ -11,6 +11,12 @@ export class MusicService {
 
   constructor(){
     this.musics = WebStorageUtil.get(Constants.MUSICS_KEY);
+
+    if(this.musics === null || this.musics === undefined){
+      this.musics = [];
+
+      WebStorageUtil.set(Constants.MUSICS_KEY, this.musics);
+    }
   }
 
   save(music: Music){

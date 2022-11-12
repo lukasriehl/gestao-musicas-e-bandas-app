@@ -19,5 +19,9 @@ export class Shared {
     localStorage.setItem(Constants.USERNAME_KEY, JSON.stringify(user));
     localStorage.setItem(Constants.USERS_KEY, JSON.stringify([]));
     localStorage.setItem(Constants.LOGGED_IN_KEY, String(false));
+
+    localStorage.setItem(Constants.BANDS_KEY, JSON.stringify([]));
+    localStorage.setItem(Constants.MUSICS_KEY, JSON.stringify([]));
+    localStorage.setItem(Constants.STYLES_KEY, JSON.stringify([]));
   }
 }
