@@ -15,12 +15,14 @@ export class Music {
     this.includeOnPlaylist = false;
 
     if (band == undefined) {
-      this.band = new Band('', {});
+      this.band = JSON.parse('{}');
     }
   }
 
   public static clone(music: Music) {
-    let m: Music = new Music(music.name, music.cdName, music.link, music.band)
+    let musicBandName = music.band?.name;
+    let m: Music = new Music(music.name, music.cdName, music.link,
+      new Band(musicBandName == undefined ? '' : musicBandName, music.band?.style));
     m.releaseYear = music.releaseYear;
     m.includeOnPlaylist = music.includeOnPlaylist;
     m.band = music.band;

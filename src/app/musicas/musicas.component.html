@@ -2,71 +2,77 @@
   <h5>Músicas</h5>
 
   <div class="row">
-    <table class="highlight" *ngIf="musics && musics!.length > 0">
-      <thead>
-        <tr>
-          <th data-field="td-value">Nome</th>
-          <th data-field="td-value">Banda</th>
-          <th data-field="td-value">Ano Lançamento</th>
-          <th data-field="td-value">CD</th>
-          <th data-field="td-value">Link</th>
-          <th></th>
-        </tr>
-      </thead>
+    <div class="col s12 m8 offset-m3">
+      <table class="highlight" *ngIf="musics && musics!.length > 0">
+        <thead>
+          <tr>
+            <th data-field="td-value">Nome</th>
+            <th data-field="td-value">Banda</th>
+            <th data-field="td-value">Ano Lançamento</th>
+            <th data-field="td-value">CD</th>
+            <th data-field="td-value">Link</th>
+            <th class="right">Ações</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr *ngFor="let m of this.musics">
-          <td>
-            <a [title]="m.name" [routerLink]="['/manutMusicas', m.id]">
-              {{ m.name }}
-            </a>
-          </td>
-          <td>{{ m.band?.name }}</td>
-          <td>{{ m.releaseYear }}</td>
-          <td>{{ m.cdName }}</td>
-          <td>
-            <a href="{{ m.link }}" target="_blank">{{ m.link }}</a>
-          </td>
-          <td class="right">
-            <a [routerLink]="['/manutMusicas', m.id]">
-              <i class="material-icons my-icon-size">edit</i></a
-            >
-            <a
-              ><i class="material-icons my-icon-size" (click)="onDelete(m.name)"
-                >delete</i
-              ></a
-            >
-            <a title="Incluir na Playlist"
-              ><i
-                class="material-icons my-icon-size"
-                (click)="onIncludeOnPlaylist(m)"
-                >add</i
-              ></a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr *ngFor="let m of this.musics">
+            <td>
+              <a [title]="m.name" [routerLink]="['/manutMusicas', m.id]">
+                {{ m.name }}
+              </a>
+            </td>
+            <td>{{ m.band?.name }}</td>
+            <td>{{ m.releaseYear }}</td>
+            <td>{{ m.cdName }}</td>
+            <td>
+              <a href="{{ m.link }}" target="_blank">{{ m.link }}</a>
+            </td>
+            <td class="right">
+              <a [routerLink]="['/manutMusicas', m.id]">
+                <i class="material-icons my-icon-size">edit</i></a
+              >
+              <a
+                ><i
+                  class="material-icons my-icon-size"
+                  (click)="onDelete(m.name)"
+                  >delete</i
+                ></a
+              >
+              <a title="Incluir na Playlist"
+                ><i
+                  class="material-icons my-icon-size"
+                  (click)="onIncludeOnPlaylist(m)"
+                  >add</i
+                ></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div *ngIf="!musics || musics!.length == 0">
-      <div class="row">
-        <div class="center-align">
-          <i class="col s12 material-icons large">mood_bad</i>
-          <span class="col s12 flow-text"
-            >Ainda não temos músicas cadastradas!</span
-          >
+      <div *ngIf="!musics || musics!.length == 0">
+        <div class="row">
+          <div class="center-align">
+            <i class="col s12 material-icons large">mood_bad</i>
+            <span class="col s12 flow-text"
+              >Ainda não temos músicas cadastradas!</span
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <button
-      class="btn waves-effect waves-light blue darken-4"
-      [routerLink]="['/manutMusicas']"
-    >
-      Nova Música
-      <i class="material-icons add">add</i>
-    </button>
+  <div class="row" style="margin-top: 50px">
+    <div class="col s12 m6 offset-m3">
+      <button
+        class="btn waves-effect waves-light green darken-4"
+        [routerLink]="['/manutMusicas']"
+      >
+        Nova Música
+        <i class="material-icons add">add</i>
+      </button>
+    </div>
   </div>
 </div>

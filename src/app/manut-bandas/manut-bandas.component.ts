@@ -26,7 +26,7 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private bandService: BandService,
     private stylesService: StylesService) {
-      this.band = new Band('');
+      this.band = new Band('', {});
       this.styles = [];
       this.isUpdate = false;
   }
@@ -59,11 +59,12 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
     } else {
       this.bandService.update(this.band);
     }
+
     this.isShowMessage = true;
     this.isSuccess = true;
     this.message = this.isUpdate ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!';
     this.form.reset();
-    this.band = new Band('', new Style({}));
+    this.band = new Band('', {});
     this.listStyles();
   }
 

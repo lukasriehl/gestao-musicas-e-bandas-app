@@ -1,6 +1,6 @@
 import { BandService } from './../services/band.service';
 import { Music } from '../model/music';
-import { Band } from '../model/band';
+import { Band, newBand } from '../model/band';
 import { MusicService } from './../services/music.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,7 @@ export class ManutMusicasComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private musicService: MusicService,
     private bandService: BandService) {
-      this.music = new Music('', '', '');
+      this.music = new Music('', '', '', JSON.parse('{}'));
       this.bands = [];
       this.isUpdate = false;
   }
@@ -62,7 +62,7 @@ export class ManutMusicasComponent implements OnInit {
     this.isSuccess = true;
     this.message = this.isUpdate ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!';
     this.form.reset();
-    this.music = new Music('', '', '', new Band('', {}));
+    this.music = new Music('', '', '', JSON.parse('{}'));
     this.listBands();
   }
 

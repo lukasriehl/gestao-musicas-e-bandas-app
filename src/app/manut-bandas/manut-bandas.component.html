@@ -25,6 +25,7 @@
           pattern="[A-Za-z0-9\s]+"
           #name="ngModel"
           required
+          [disabled]="this.isUpdate"
         />
         <label for="input-name" class="active">Nome *</label>
         <div class="red-text" [hidden]="name.valid || name.untouched">
@@ -55,7 +56,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin-left: auto">
         <div class="input-field col s12">
           <label for="select-style" class="active">Estilo *</label>
           <select
@@ -79,12 +80,12 @@
       </div>
 
       <button
-        class="btn waves-effect waves-light grey darken-4"
+        class="btn waves-effect waves-light blue darken-4"
         type="submit"
         [disabled]="!form.valid"
       >
         Salvar
-        <i class="material-icons right">send</i>
+        <i class="material-icons save">save</i>
       </button>
     </form>
   </div>

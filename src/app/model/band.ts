@@ -2,7 +2,7 @@ import { Style } from './style';
 import { Member } from "./member";
 
 export class Band {
-  public id?: number;
+  public id: number;
   public foundationYear?: number;
   public members: Member[];
   constructor(public name: string, public style?: Style) {
@@ -22,3 +22,5 @@ export class Band {
     return b;
   }
 }
+
+export const newBand = new Band('', {});
