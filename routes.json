@@ -1,0 +1,11 @@
+{
+  "/usuarios": "/users",
+  "/usuarios/id/:id": "/users?id=:id",
+  "/bandas": "/bands",
+  "/bandas/id/:id": "/bands?id=:id",
+  "/bandas/name/:name": "/bands?name=:name",
+  "/musicas": "/musics",
+  "/musicas/id/:id": "/musics?id=:id",
+  "/playlist/userId/:userId": "/playlist?userId=:userId",
+  "/estilos": "/styles"
+}

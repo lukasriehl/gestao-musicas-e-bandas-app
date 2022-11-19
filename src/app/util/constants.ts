@@ -5,4 +5,6 @@ export class Constants {
   public static readonly BANDS_KEY = "bands";
   public static readonly MUSICS_KEY = "musics";
   public static readonly STYLES_KEY = "styles";
+  public static readonly HOST = "http://localhost:3000";
+  public static readonly CONTENT_TYPE_JSON = "application/json";
 }

@@ -1,16 +1,58 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 986,
+      "name": "Lukas Riehl",
       "username": "lukas.riehl",
       "password": "qwerty",
       "isAdmin": true
+    }
+  ],
+  "bands": [
+    {
+      "name": "Kiss",
+      "style": {
+        "id": 1,
+        "name": "Rock'n'Roll"
+      },
+      "id": 779,
+      "musics": [],
+      "foundationYear": "1972"
+    }
+  ],
+  "musics": [],
+  "styles": [
+    {
+      "id": 1,
+      "name": "Rock'n'Roll"
     },
     {
-      "id": "2",
-      "username": "renato.riehl",
-      "password": "qwerty",
-      "isAdmin": false
+      "id": 2,
+      "name": "Hip Hop"
+    },
+    {
+      "id": 3,
+      "name": "Rap"
+    },
+    {
+      "id": 4,
+      "name": "Reggae"
+    },
+    {
+      "id": 5,
+      "name": "Samba"
+    },
+    {
+      "id": 6,
+      "name": "Pagode"
+    },
+    {
+      "id": 7,
+      "name": "Clássica"
+    },
+    {
+      "id": 8,
+      "name": "Outro"
     }
   ]
 }

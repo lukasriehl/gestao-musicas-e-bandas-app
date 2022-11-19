@@ -1,4 +1,4 @@
-import { BandService } from './../services/band.service';
+import { BandPromiseService } from './../services/band-promise.service';
 import { Component, OnInit } from '@angular/core';
 import { Shared } from '../util/shared';
 import { Band } from '../model/band';
@@ -15,11 +15,12 @@ export class BandasComponent implements OnInit {
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private bandService: BandService) { }
+  constructor(private BandPromiseService: BandPromiseService) { }
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
-    this.bands = this.bandService.getBands();
+
+    this.exibirBandas();
   }
 
   onDelete(name: string) {
@@ -29,15 +30,46 @@ export class BandasComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.bandService.delete(name);
-    this.isShowMessage = true;
-    this.isSuccess = response;
-    if (response) {
-      this.message = 'O item foi removido com sucesso!';
-    } else {
+
+    this.BandPromiseService.deleteByName(name)
+    .then((d: boolean) => {
+      this.isSuccess = d;
+      this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+    }).then( () => {
+      this.BandPromiseService.getAll()
+      .then((b: Band[]) => {
+        this.bands = b;
+      })
+      .catch((e) => {
+        this.isShowMessage = true;
+        this.isSuccess = false;
+        this.message = 'Falha ao exibir as bandas cadastradas!';
+      })
+    })
+    .catch((e) => {
+      this.isSuccess = false;
       this.message = 'Opps! O item não pode ser removido!';
-    }
-    this.bands = this.bandService.getBands();
+    })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+      }, 700);
+    }));
+  }
+
+  exibirBandas(){
+    this.BandPromiseService.getAll()
+    .then((b: Band[]) => {
+      this.bands = b;
+    })
+    .catch((e) => {
+      this.isShowMessage = true;
+      this.isSuccess = false;
+      this.message = 'Falha ao exibir as bandas cadastradas!';
+    });
   }
 
 }

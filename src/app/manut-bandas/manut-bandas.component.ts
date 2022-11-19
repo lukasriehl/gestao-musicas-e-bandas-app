@@ -1,6 +1,6 @@
 import { Style } from './../model/style';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { BandService } from '../services/band.service';
+import { BandPromiseService } from './../services/band-promise.service';
 import { StylesService } from '../services/styles.service';
 import { Band } from '../model/band';
 import { ActivatedRoute } from '@angular/router';
@@ -19,61 +19,91 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
   styles: Style[];
   isUpdate: boolean;
 
-  isSubmitted!: boolean;
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private route: ActivatedRoute, private bandService: BandService,
+  constructor(private route: ActivatedRoute, private bandPromiseService: BandPromiseService,
     private stylesService: StylesService) {
-      this.band = new Band('', {});
+      this.band = new Band('', JSON.parse('{}'));
       this.styles = [];
       this.isUpdate = false;
   }
 
   ngOnInit(): void {
-    this.listStyles();
+    this.listStyles()
+    .then(() => {
+      const routeParams = this.route.snapshot.paramMap;
+      const bandId = Number(routeParams.get('bandId'));
 
-    const routeParams = this.route.snapshot.paramMap;
-    const bandId = Number(routeParams.get('bandId'));
+      this.isUpdate = bandId !== undefined && bandId > 0;
 
-    this.isUpdate = bandId !== undefined && bandId > 0;
+      console.log("Id da banda para alteração: " + bandId);
 
-    if(this.isUpdate){
-      let bandToEdit = this.bandService.findById(bandId);
-      this.band = Band.clone(bandToEdit);
+      if(this.isUpdate){
+        this.bandPromiseService.getById(bandId)
+        .then((b: Band) => {
+          this.band = Band.clone(b);
 
-      setTimeout(() => {
-        M.FormSelect.init(this.styleSelect.nativeElement);
-      }, 100);
-    }
+          setTimeout(() => {
+            M.FormSelect.init(this.styleSelect.nativeElement);
+          }, 100);
+        });
+      }
+    });
   }
 
   ngAfterViewInit() { }
 
   onSubmit() {
-    this.isSubmitted = true;
+    this.bandPromiseService.isExists(this.band.name)
+    .then((e: boolean) => {
+      if(e){
+        this.bandPromiseService.update(this.band)
+        .then(() => {
+          this.message = 'Alteração realizada com sucesso!';
+        })
+      } else{
+        this.bandPromiseService.save(this.band)
+        .then(() => {
+          this.message = 'Cadastro realizado com sucesso!';
+        })
+      }
 
-    if (!this.bandService.isExists(this.band.name)) {
-      this.bandService.save(this.band);
-    } else {
-      this.bandService.update(this.band);
-    }
-
-    this.isShowMessage = true;
-    this.isSuccess = true;
-    this.message = this.isUpdate ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!';
-    this.form.reset();
-    this.band = new Band('', {});
-    this.listStyles();
+      this.isSuccess = true;
+    })
+    .catch((e) => {
+      this.isSuccess = false;
+      this.message = 'Falha ao cadastrar/alterar banda!';
+    })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+        this.form.reset();
+        this.band = new Band('', JSON.parse('{}'));
+      }, 700)
+    }))
+    .then(() => {
+      setTimeout(() => {
+        this.listStyles();
+      }, 700);
+    })
   }
 
-  listStyles(){
-    this.styles = this.stylesService.getDefaultStyles();
+  listStyles(): Promise<void> {
+    const p = this.stylesService.getAll()
+    .then((s: Style[]) => {
+      this.styles = s;
 
-    setTimeout(() => {
-      M.FormSelect.init(this.styleSelect.nativeElement);
-    }, 100);
+      setTimeout(() => {
+        M.FormSelect.init(this.styleSelect.nativeElement);
+      }, 100);
+    });
+
+    return p;
   }
 
   /**

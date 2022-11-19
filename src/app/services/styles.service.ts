@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Style } from '../model/style';
+import { Constants } from '../util/constants';
+import { HttpClient } from '@angular/common/http';
+import {firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StylesService {
+  URL = Constants.HOST + '/styles';
+  URL_PT = Constants.HOST + '/estilos';
+
+  constructor(private httpClient: HttpClient) {}
 
   getDefaultStyles(): Style[]{
     let styles = [];
@@ -50,6 +57,14 @@ export class StylesService {
     styles.push(style);
 
     return styles;
+  }
+
+  getAll(): Promise<Style[]> {
+    return firstValueFrom(this.httpClient.get<Style[]>(`${this.URL}`));
+  }
+
+  getById(id: number): Promise<Style> {
+    return firstValueFrom(this.httpClient.get<Style>(`${this.URL}/${id}`));
   }
 
 }
