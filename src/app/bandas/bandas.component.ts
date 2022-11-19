@@ -15,12 +15,12 @@ export class BandasComponent implements OnInit {
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private BandPromiseService: BandPromiseService) { }
+  constructor(private bandPromiseService: BandPromiseService) { }
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
 
-    this.exibirBandas();
+    this.showBands();
   }
 
   onDelete(name: string) {
@@ -31,12 +31,12 @@ export class BandasComponent implements OnInit {
       return;
     }
 
-    this.BandPromiseService.deleteByName(name)
+    this.bandPromiseService.deleteByName(name)
     .then((d: boolean) => {
       this.isSuccess = d;
       this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
     }).then( () => {
-      this.BandPromiseService.getAll()
+      this.bandPromiseService.getAll()
       .then((b: Band[]) => {
         this.bands = b;
       })
@@ -60,8 +60,8 @@ export class BandasComponent implements OnInit {
     }));
   }
 
-  exibirBandas(){
-    this.BandPromiseService.getAll()
+  showBands(){
+    this.bandPromiseService.getAll()
     .then((b: Band[]) => {
       this.bands = b;
     })

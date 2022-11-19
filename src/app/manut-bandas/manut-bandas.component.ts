@@ -56,9 +56,13 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() { }
 
   onSubmit() {
-    this.bandPromiseService.isExists(this.band.name)
-    .then((e: boolean) => {
-      if(e){
+    this.bandPromiseService.findIdByName(this.band.name)
+    .then((i: number) => {
+      if(i >= 0){
+        if(!this.isUpdate){
+          this.band.id = i;
+        }
+
         this.bandPromiseService.update(this.band)
         .then(() => {
           this.message = 'Alteração realizada com sucesso!';

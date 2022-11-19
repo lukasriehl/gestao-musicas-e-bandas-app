@@ -1,7 +1,7 @@
-import { BandService } from './../services/band.service';
+import { MusicPromiseService } from './../services/music-promise.service';
+import { BandPromiseService } from '../services/band-promise.service';
 import { Music } from '../model/music';
-import { Band, newBand } from '../model/band';
-import { MusicService } from './../services/music.service';
+import { Band} from '../model/band';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -19,59 +19,95 @@ export class ManutMusicasComponent implements OnInit {
   bands: Band[];
   isUpdate: boolean;
 
-  isSubmitted!: boolean;
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private route: ActivatedRoute, private musicService: MusicService,
-    private bandService: BandService) {
+  constructor(private route: ActivatedRoute, private musicPromiseService: MusicPromiseService,
+    private bandPromiseService: BandPromiseService) {
       this.music = new Music('', '', '', JSON.parse('{}'));
       this.bands = [];
       this.isUpdate = false;
   }
 
   ngOnInit(): void {
-    this.listBands();
+    this.listBands()
+    .then(() => {
+      const routeParams = this.route.snapshot.paramMap;
+      const musicId = Number(routeParams.get('musicId'));
 
-    const routeParams = this.route.snapshot.paramMap;
-    const musicId = Number(routeParams.get('musicId'));
+      this.isUpdate = musicId !== undefined && musicId > 0;
 
-    this.isUpdate = musicId !== undefined && musicId > 0;
+      console.log("Id da música para alteração: " + musicId);
 
-    if(this.isUpdate){
-      let musicToEdit = this.musicService.findById(musicId);
-      this.music = Music.clone(musicToEdit);
+      if(this.isUpdate){
+        this.musicPromiseService.getById(musicId)
+        .then((m: Music) => {
+          this.music = Music.clone(m);
 
-      setTimeout(() => {
-        M.FormSelect.init(this.bandSelect.nativeElement);
-      }, 100);
-    }
+          setTimeout(() => {
+            M.FormSelect.init(this.bandSelect.nativeElement);
+          }, 100);
+        });
+      }
+    });
   }
 
   ngAfterViewInit() {}
 
   onSubmit() {
-    this.isSubmitted = true;
-    if (!this.musicService.isExists(this.music.name)) {
-      this.musicService.save(this.music);
-    } else {
-      this.musicService.update(this.music);
-    }
-    this.isShowMessage = true;
-    this.isSuccess = true;
-    this.message = this.isUpdate ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!';
-    this.form.reset();
-    this.music = new Music('', '', '', JSON.parse('{}'));
-    this.listBands();
+    this.musicPromiseService.findIdByName(this.music.name)
+    .then((i: number) => {
+      if(i >= 0){
+        if(!this.isUpdate){
+          this.music.id = i;
+        }
+
+        this.musicPromiseService.update(this.music)
+        .then(() => {
+          this.message = 'Alteração realizada com sucesso!';
+        })
+      } else{
+        this.musicPromiseService.save(this.music)
+        .then(() => {
+          this.message = 'Cadastro realizado com sucesso!';
+        })
+      }
+
+      this.isSuccess = true;
+    })
+    .catch((e) => {
+      this.isSuccess = false;
+      this.message = 'Falha ao cadastrar/alterar música!';
+    })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+        this.form.reset();
+        this.music = new Music('', '', '', JSON.parse('{}'));
+      }, 700)
+    }))
+    .then(() => {
+      setTimeout(() => {
+        this.listBands();
+      }, 700);
+    })
   }
 
   listBands(){
-    this.bands = this.bandService.getBands();
+    const b = this.bandPromiseService.getAll()
+    .then((b: Band[]) => {
+      this.bands = b;
 
-    setTimeout(() => {
-      M.FormSelect.init(this.bandSelect.nativeElement);
-    }, 100);
+      setTimeout(() => {
+        M.FormSelect.init(this.bandSelect.nativeElement);
+      }, 100);
+    });
+
+    return b;
   }
 
   /**

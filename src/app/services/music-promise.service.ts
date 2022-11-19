@@ -1,15 +1,15 @@
 import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Band } from '../model/band';
+import { Music } from './../model/music';
 import {firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BandPromiseService {
-  URL = Constants.HOST + '/bands';
-  URL_PT = Constants.HOST + '/bandas';
+export class MusicPromiseService {
+  URL = Constants.HOST + '/musics';
+  URL_PT = Constants.HOST + '/musicas';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': Constants.CONTENT_TYPE_JSON }),
@@ -17,50 +17,50 @@ export class BandPromiseService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Promise<Band[]> {
-    return firstValueFrom(this.httpClient.get<Band[]>(`${this.URL}`));
+  getAll(): Promise<Music[]> {
+    return firstValueFrom(this.httpClient.get<Music[]>(`${this.URL}`));
   }
 
-  getById(id: number): Promise<Band> {
-    return firstValueFrom(this.httpClient.get<Band>(`${this.URL}/${id}`));
+  getById(id: number): Promise<Music> {
+    return firstValueFrom(this.httpClient.get<Music>(`${this.URL}/${id}`));
   }
 
-  getByName(name: string): Promise<Band[]> {
-    return firstValueFrom(this.httpClient.get<Band[]>(`${this.URL}?name=${name}`));
+  getByName(name: string): Promise<Music[]> {
+    return firstValueFrom(this.httpClient.get<Music[]>(`${this.URL}?name=${name}`));
   }
 
   findIdByName(name: string): Promise<number> {
     const id = new Promise<number>((resolve, reject) => {
       this.getByName(name)
-      .then((b: Band[]) => {
+      .then((b: Music[]) => {
         resolve(b !== undefined && b.length > 0 ? b[0].id : -1);
       })
       .catch((e) => {
-        reject('Falha ao verificar se banda com o nome ' + name + ' existe!');
+        reject('Falha ao verificar se música com o nome ' + name + ' existe!');
       });
     });
 
     return id;
   }
 
-  save(band: Band): Promise<Band> {
+  save(music: Music): Promise<Music> {
     //TODO: AQUI IMPLEMENTAR A VERIFICAÇÃO SE O ID É REPETIDO
     return firstValueFrom (
       this.httpClient
-      .post<Band>(
+      .post<Music>(
         this.URL,
-        JSON.stringify(band),
+        JSON.stringify(music),
         this.httpOptions
       )
     );
   }
 
-  update(band: Band): Promise<Band> {
+  update(music: Music): Promise<Music> {
     return firstValueFrom (
       this.httpClient
-      .put<Band>(
-        `${this.URL}/${band.id}`,
-        JSON.stringify(band),
+      .put<Music>(
+        `${this.URL}/${music.id}`,
+        JSON.stringify(music),
          this.httpOptions
       )
     );
@@ -70,14 +70,14 @@ export class BandPromiseService {
     const deletou = new Promise<boolean>((resolve, reject) => {
       firstValueFrom (
         this.httpClient
-        .delete<Band>(
+        .delete<Music>(
           `${this.URL}/${id}`)
       )
       .then( () => {
           resolve(true);
       })
       .catch((e) => {
-        reject('Falha ao deletar banda de ID ' + id + '!');
+        reject('Falha ao deletar música de ID ' + id + '!');
       });
     });
 
@@ -87,19 +87,19 @@ export class BandPromiseService {
   deleteByName(name: string): Promise<boolean> {
     const deletou = new Promise<boolean>((resolve, reject) => {
         this.getByName(name)
-        .then((b: Band[]) => {
-            let band = b[0];
+        .then((m: Music[]) => {
+            let music = m[0];
 
-            this.delete(band.id)
+            this.delete(music.id)
             .then((d: boolean) => {
                 resolve(d);
             })
             .catch((e) => {
-              reject('Falha ao deletar banda com nome ' + band.name + ' !');
+              reject('Falha ao deletar música com nome ' + music.name + ' !');
             });
         })
         .catch((e) => {
-          reject('Nenhuma banda com o nome ' + name + ' encontrada para remoção!');
+          reject('Nenhuma música com o nome ' + name + ' encontrada para remoção!');
         });
     });
 
