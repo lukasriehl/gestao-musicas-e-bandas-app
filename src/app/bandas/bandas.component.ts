@@ -1,7 +1,7 @@
 import { BandPromiseService } from './../services/band-promise.service';
 import { Component, OnInit } from '@angular/core';
 import { Shared } from '../util/shared';
-import { Band } from '../model/band';
+import { BandDTO } from '../model/band';
 
 @Component({
   selector: 'app-bandas',
@@ -9,7 +9,7 @@ import { Band } from '../model/band';
   styleUrls: ['./bandas.component.css']
 })
 export class BandasComponent implements OnInit {
-  bands?: Band[];
+  bands?: BandDTO[];
 
   isShowMessage: boolean = false;
   isSuccess!: boolean;
@@ -36,8 +36,8 @@ export class BandasComponent implements OnInit {
       this.isSuccess = d;
       this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
     }).then( () => {
-      this.bandPromiseService.getAll()
-      .then((b: Band[]) => {
+      this.bandPromiseService.listAllWithStyle()
+      .then((b: BandDTO[]) => {
         this.bands = b;
       })
       .catch((e) => {
@@ -61,8 +61,8 @@ export class BandasComponent implements OnInit {
   }
 
   showBands(){
-    this.bandPromiseService.getAll()
-    .then((b: Band[]) => {
+    this.bandPromiseService.listAllWithStyle()
+    .then((b: BandDTO[]) => {
       this.bands = b;
     })
     .catch((e) => {

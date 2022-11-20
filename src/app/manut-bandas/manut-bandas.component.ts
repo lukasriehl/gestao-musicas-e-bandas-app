@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Style } from './../model/style';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { BandPromiseService } from './../services/band-promise.service';
@@ -17,6 +18,7 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
 
   band: Band;
   styles: Style[];
+  selStyle: Style;
   isUpdate: boolean;
 
   isShowMessage: boolean = false;
@@ -25,8 +27,9 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private bandPromiseService: BandPromiseService,
     private stylesService: StylesService) {
-      this.band = new Band('', JSON.parse('{}'));
+      this.band = new Band('');
       this.styles = [];
+      this.selStyle = JSON.parse('{}');
       this.isUpdate = false;
   }
 
@@ -45,6 +48,13 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
         .then((b: Band) => {
           this.band = Band.clone(b);
 
+          if(this.band.styleId !== undefined){
+            this.stylesService.getById(Number(this.band.styleId))
+            .then((s: Style) => {
+                this.selStyle = s;
+            });
+          }
+
           setTimeout(() => {
             M.FormSelect.init(this.styleSelect.nativeElement);
           }, 100);
@@ -56,6 +66,8 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() { }
 
   onSubmit() {
+    this.band.styleId = String(this.selStyle.id);
+
     this.bandPromiseService.findIdByName(this.band.name)
     .then((i: number) => {
       if(i >= 0){
@@ -87,7 +99,8 @@ export class ManutBandasComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.isShowMessage = false;
         this.form.reset();
-        this.band = new Band('', JSON.parse('{}'));
+        this.band = new Band('');
+        this.selStyle = JSON.parse('{}');
       }, 700)
     }))
     .then(() => {

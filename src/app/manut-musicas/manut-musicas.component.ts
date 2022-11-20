@@ -17,6 +17,7 @@ export class ManutMusicasComponent implements OnInit {
 
   music!: Music;
   bands: Band[];
+  selBand: Band;
   isUpdate: boolean;
 
   isShowMessage: boolean = false;
@@ -25,8 +26,9 @@ export class ManutMusicasComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private musicPromiseService: MusicPromiseService,
     private bandPromiseService: BandPromiseService) {
-      this.music = new Music('', '', '', JSON.parse('{}'));
+      this.music = new Music('', '', '');
       this.bands = [];
+      this.selBand = JSON.parse('{}');
       this.isUpdate = false;
   }
 
@@ -45,6 +47,13 @@ export class ManutMusicasComponent implements OnInit {
         .then((m: Music) => {
           this.music = Music.clone(m);
 
+          if(this.music.bandId !== undefined){
+            this.bandPromiseService.getById(Number(this.music.bandId))
+            .then((b: Band) => {
+                this.selBand = b;
+            });
+          }
+
           setTimeout(() => {
             M.FormSelect.init(this.bandSelect.nativeElement);
           }, 100);
@@ -56,6 +65,8 @@ export class ManutMusicasComponent implements OnInit {
   ngAfterViewInit() {}
 
   onSubmit() {
+    this.music.bandId = String(this.selBand.id);
+
     this.musicPromiseService.findIdByName(this.music.name)
     .then((i: number) => {
       if(i >= 0){
@@ -87,7 +98,8 @@ export class ManutMusicasComponent implements OnInit {
       setTimeout(() => {
         this.isShowMessage = false;
         this.form.reset();
-        this.music = new Music('', '', '', JSON.parse('{}'));
+        this.music = new Music('', '', '');
+        this.selBand = JSON.parse('{}');
       }, 700)
     }))
     .then(() => {

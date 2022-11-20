@@ -11,42 +11,49 @@
   "bands": [
     {
       "name": "Kiss",
-      "style": {
-        "id": 1,
-        "name": "Rock'n'Roll"
-      },
       "id": 779,
       "musics": [],
-      "foundationYear": "1972"
+      "foundationYear": "1973",
+      "styleId": "1"
     },
     {
       "name": "Blink 182",
-      "style": {
-        "id": 1,
-        "name": "Rock'n'Roll"
-      },
       "id": 483,
       "musics": [],
-      "foundationYear": "1994"
+      "foundationYear": "1994",
+      "styleId": "1"
+    },
+    {
+      "name": "Deep Purple",
+      "id": 291,
+      "musics": [],
+      "foundationYear": "1970",
+      "styleId": "1"
+    },
+    {
+      "name": "Ramnstein",
+      "id": 813,
+      "musics": [],
+      "foundationYear": "1994",
+      "styleId": "1"
     }
   ],
   "musics": [
     {
-      "band": {
-        "name": "Blink 182",
-        "style": {
-          "id": 1,
-          "name": "Rock'n'Roll"
-        },
-        "id": 483,
-        "musics": [],
-        "foundationYear": "1994"
-      },
       "id": 253,
       "name": "Always",
       "cdName": "Untitled",
       "link": "https://www.youtube.com/watch?v=CvtJVku_mJw",
-      "releaseYear": "2004"
+      "releaseYear": "2003",
+      "bandId": "483"
+    },
+    {
+      "id": 553,
+      "name": "Keine Lust",
+      "cdName": "Reise Reise",
+      "link": "https://www.youtube.com/watch?v=1M4ADcMn3dA&list=RDMM&index=3",
+      "releaseYear": "1997",
+      "bandId": "813"
     }
   ],
   "styles": [

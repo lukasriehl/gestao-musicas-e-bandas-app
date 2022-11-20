@@ -1,5 +1,6 @@
 import { MusicPromiseService } from './../services/music-promise.service';
 import { Music } from './../model/music';
+import { MusicDTO } from './../model/music';
 import { Component, OnInit } from '@angular/core';
 import { Shared } from '../util/shared';
 
@@ -9,7 +10,7 @@ import { Shared } from '../util/shared';
   styleUrls: ['./musicas.component.css']
 })
 export class MusicasComponent implements OnInit {
-  musics?: Music[];
+  musics?: MusicDTO[];
 
   isShowMessage: boolean = false;
   isSuccess!: boolean;
@@ -35,8 +36,8 @@ export class MusicasComponent implements OnInit {
       this.isSuccess = d;
       this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
     }).then( () => {
-      this.musicPromiseService.getAll()
-      .then((m: Music[]) => {
+      this.musicPromiseService.listAllWithBand()
+      .then((m: MusicDTO[]) => {
         this.musics = m;
       })
       .catch((e) => {
@@ -60,13 +61,13 @@ export class MusicasComponent implements OnInit {
   }
 
   //TODO: IMPLEMENTAR
-  onIncludeOnPlaylist(music: Music){
+  onIncludeOnPlaylist(music: MusicDTO){
 
   }
 
   exibirMusicas(){
-    this.musicPromiseService.getAll()
-    .then((m: Music[]) => {
+    this.musicPromiseService.listAllWithBand()
+    .then((m: MusicDTO[]) => {
       this.musics = m;
     })
     .catch((e) => {

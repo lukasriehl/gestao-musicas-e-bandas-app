@@ -2,6 +2,7 @@ import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Band } from '../model/band';
+import { BandDTO } from '../model/band';
 import {firstValueFrom} from 'rxjs';
 
 @Injectable({
@@ -10,6 +11,7 @@ import {firstValueFrom} from 'rxjs';
 export class BandPromiseService {
   URL = Constants.HOST + '/bands';
   URL_PT = Constants.HOST + '/bandas';
+  URL_EXPAND_STYLES = Constants.HOST + '/bands?_expand=style';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': Constants.CONTENT_TYPE_JSON }),
@@ -19,6 +21,10 @@ export class BandPromiseService {
 
   getAll(): Promise<Band[]> {
     return firstValueFrom(this.httpClient.get<Band[]>(`${this.URL}`));
+  }
+
+  listAllWithStyle(): Promise<BandDTO[]> {
+    return firstValueFrom(this.httpClient.get<BandDTO[]>(`${this.URL_EXPAND_STYLES}`));
   }
 
   getById(id: number): Promise<Band> {
