@@ -13,28 +13,35 @@
       "name": "Kiss",
       "id": 779,
       "musics": [],
-      "foundationYear": "1973",
+      "foundationDate": "1974-01-01",
       "styleId": "1"
     },
     {
       "name": "Blink 182",
       "id": 483,
       "musics": [],
-      "foundationYear": "1994",
+      "foundationDate": "1994-01-01",
       "styleId": "1"
     },
     {
       "name": "Deep Purple",
       "id": 291,
       "musics": [],
-      "foundationYear": "1970",
+      "foundationDate": "1970-01-01",
       "styleId": "1"
     },
     {
       "name": "Ramnstein",
       "id": 813,
       "musics": [],
-      "foundationYear": "1994",
+      "foundationDate": "1994-01-01",
+      "styleId": "1"
+    },
+    {
+      "name": "The Doors",
+      "id": 640,
+      "musics": [],
+      "foundationDate": "1962-01-27",
       "styleId": "1"
     }
   ],
@@ -44,7 +51,7 @@
       "name": "Always",
       "cdName": "Untitled",
       "link": "https://www.youtube.com/watch?v=CvtJVku_mJw",
-      "releaseYear": "2003",
+      "releaseDate": "2013-10-01",
       "bandId": "483"
     },
     {
@@ -52,7 +59,7 @@
       "name": "Keine Lust",
       "cdName": "Reise Reise",
       "link": "https://www.youtube.com/watch?v=1M4ADcMn3dA&list=RDMM&index=3",
-      "releaseYear": "1997",
+      "releaseDate": "1997-01-01T00:12:50.798Z",
       "bandId": "813"
     }
   ],
@@ -88,6 +95,18 @@
     {
       "id": 8,
       "name": "Outro"
+    }
+  ],
+  "playlists": [
+    {
+      "id": 1,
+      "name": "Playlist de Rock do Lukas",
+      "userId": "986",
+      "musics": [
+        {
+          "musicId": "253"
+        }
+      ]
     }
   ]
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Constants } from '../util/constants';
 import { LoginService } from './../services/login.service';
-import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { Subscription } from 'rxjs';
 import { WebStorageUtil } from '../util/web-storage-util';

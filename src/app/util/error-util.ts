@@ -8,7 +8,6 @@ export class ErrorUtil {
     let errorMessage = '';
     console.log(error);
     if (error.status === 0) {
-      //if (error instanceof Error || error instanceof ErrorEvent) {
       console.error('cliente');
       errorMessage =
         error instanceof AppError
@@ -19,20 +18,8 @@ export class ErrorUtil {
       errorMessage = ErrorUtil.getServerErrorMessage(error);
     }
 
-    //retorna um HttpErrorResponse
-    //return throwError(error);
-
     //retorna um Error
     return throwError(new Error(errorMessage));
-
-    //retorna um Error
-    //return throwError(Error(errorMessage));
-
-    //retorna apenas uma string
-    //return throwError(errorMessage);
-
-    //retorna uma função
-    //return throwError(() => new Error(errorMessage));
   }
 
   private static getServerErrorMessage(error: HttpErrorResponse) {

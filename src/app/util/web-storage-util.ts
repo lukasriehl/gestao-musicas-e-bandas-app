@@ -29,4 +29,8 @@ export class WebStorageUtil {
   static sequenceId(key: string) {
     return this.getArray(key).length;
   }
+
+  static remove(key: string){
+    localStorage.removeItem(key);
+  }
 }

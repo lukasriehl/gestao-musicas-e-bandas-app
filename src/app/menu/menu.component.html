@@ -9,6 +9,13 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
+        <span
+          class="my-font"
+          [hidden]="!this.loggedIn"
+          style="margin-left: 100px"
+        >
+          Usuário - {{ this.user.username }}
+        </span>
         <ul class="right hide-on-med-and-down" [hidden]="!this.loggedIn">
           <li><a [routerLink]="['/bandas']" class="flow-text">Bandas</a></li>
           <li><a [routerLink]="['/musicas']" class="flow-text">Músicas</a></li>
@@ -36,7 +43,6 @@
       <li><a [routerLink]="['/bandas']" class="flow-text">Bandas</a></li>
       <li><a [routerLink]="['/musicas']" class="flow-text">Músicas</a></li>
       <li><a [routerLink]="['/home']" class="flow-text">Home</a></li>
-      <li><a [routerLink]="['/login']" class="flow-text">Sair</a></li>
       <li>
         <a class="flow-text" (click)="onLogout()">Sair</a>
       </li>

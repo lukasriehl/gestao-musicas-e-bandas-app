@@ -10,8 +10,20 @@
   <div class="container">
     <app-playlist-panel
       #playlist
-      [value]="this.user.playlist"
+      [value]="this.playlists"
       (playlistWarnEvent)="this.onPlaylistWarnEvent($event)"
     ></app-playlist-panel>
+
+    <div class="row" style="margin-top: 50px">
+      <div class="col s12 m6 offset-m3">
+        <button
+          class="btn waves-effect waves-light green darken-4"
+          [routerLink]="['/playlists']"
+        >
+          Nova Playlist
+          <i class="material-icons add">add</i>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

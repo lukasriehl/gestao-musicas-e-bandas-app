@@ -3,7 +3,7 @@ import { Music } from './music';
 
 export class Band {
   public id: number;
-  public foundationYear?: number;
+  public foundationDate?: Date;
   public musics: Music[];
   public styleId!: string;
   constructor(public name: string) {
@@ -15,7 +15,7 @@ export class Band {
   public static clone(band: Band) {
     let b: Band = new Band(band.name);
     b.id = band.id;
-    b.foundationYear = band.foundationYear;
+    b.foundationDate = band.foundationDate;
     b.musics = band.musics;
     b.styleId = band.styleId;
     return b;
@@ -25,6 +25,6 @@ export class Band {
 export interface BandDTO {
   id: number;
   name: string;
-  foundationYear: number;
+  foundationDate: Date;
   style: Style
 }

@@ -18,7 +18,7 @@
         <thead>
           <tr>
             <th data-field="td-value">Nome</th>
-            <th data-field="td-value">Ano Fundação</th>
+            <th data-field="td-value">Data de Fundação</th>
             <th data-field="td-value">Estilo</th>
             <th class="right">Ações</th>
           </tr>
@@ -31,8 +31,8 @@
                 {{ b.name }}
               </a>
             </td>
-            <td>{{ b.foundationYear }}</td>
-            <td>{{ b.style.name }}</td>
+            <td>{{ b.foundationDate | date: "dd/MM/yyyy" }}</td>
+            <td>{{ b.style.name | uppercase }}</td>
             <td class="right">
               <a [routerLink]="['/manutBandas', b.id]">
                 <i class="material-icons my-icon-size">edit</i></a

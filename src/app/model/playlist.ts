@@ -11,3 +11,8 @@ export class Playlist {
     this.musics = [];
   }
 }
+export interface PlaylistDTO {
+  id: number;
+  name: string;
+  musics: Music[];
+}

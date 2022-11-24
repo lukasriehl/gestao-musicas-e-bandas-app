@@ -3,7 +3,7 @@ import { Band } from './band';
 export class Music {
   public id: number;
   public name: string;
-  public releaseYear!: number;
+  public releaseDate!: Date;
   public cdName: string;
   public link: string;
   public bandId!: string;
@@ -18,7 +18,7 @@ export class Music {
   public static clone(music: Music) {
     let m: Music = new Music(music.name, music.cdName, music.link);
     m.id = music.id;
-    m.releaseYear = music.releaseYear;
+    m.releaseDate = music.releaseDate;
     m.bandId = music.bandId;
     return m;
   }
@@ -26,7 +26,7 @@ export class Music {
 export interface MusicDTO {
   id: number;
   name: string;
-  releaseYear: number;
+  releaseDate: Date;
   cdName: string;
   link: string;
   band: Band;

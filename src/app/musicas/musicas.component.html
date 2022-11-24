@@ -19,7 +19,7 @@
           <tr>
             <th data-field="td-value">Nome</th>
             <th data-field="td-value">Banda</th>
-            <th data-field="td-value">Ano Lançamento</th>
+            <th data-field="td-value">Data de Lançamento</th>
             <th data-field="td-value">CD</th>
             <th data-field="td-value">Link</th>
             <th class="right">Ações</th>
@@ -34,7 +34,7 @@
               </a>
             </td>
             <td>{{ m.band.name }}</td>
-            <td>{{ m.releaseYear }}</td>
+            <td>{{ m.releaseDate | date: "dd/MM/yyyy" }}</td>
             <td>{{ m.cdName }}</td>
             <td>
               <a href="{{ m.link }}" target="_blank">{{ m.link }}</a>

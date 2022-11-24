@@ -18,21 +18,22 @@ import { Playlist } from './../model/playlist';
   styleUrls: ['./playlist-panel.component.css']
 })
 export class PlaylistPanelComponent implements OnInit {
-  @Input() value: Playlist = new Playlist('');
+  @Input() value: Playlist[] = [];
   @Output() playlistWarnEvent = new EventEmitter<boolean>();
   public user?: User;
-  public name?: string;
+  //public name?: string;
 
 
   constructor() {
-    this.name = this.value?.name;
+    //this.name = this.value?.name;
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
-    if(this.value.musics.length === 0){
+    console.log("Quantidade de playlists: " + this.value.length);
+    if(this.value.length === 0){
       setTimeout(() => {
         this.playlistWarnEvent.emit(true);
       }, 3000);

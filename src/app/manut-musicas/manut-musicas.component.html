@@ -35,24 +35,24 @@
 
       <div class="input-field col s12">
         <input
-          id="input-releaseyear"
-          name="input-releaseyear"
-          placeholder="Ano de Lançamento"
-          type="text"
+          id="input-releasedate"
+          name="input-releasedate"
+          placeholder="Data de Lançamento"
+          type="date"
           class="validate"
-          [(ngModel)]="this.music.releaseYear"
-          pattern="^\d{4}$"
-          #releaseYear="ngModel"
+          [(ngModel)]="this.music.releaseDate"
+          #releaseDate="ngModel"
           required
         />
-        <label for="input-releaseyear" class="active"
-          >Ano de Lançamento *</label
+        <label for="input-releasedate" class="active"
+          >Data de Lançamento *</label
         >
         <div
           class="red-text"
-          [hidden]="releaseYear.valid || releaseYear.untouched"
+          [hidden]="releaseDate.valid || releaseDate.untouched"
         >
-          Por favor, informe o ano de lançamento da música (4 algarismos).
+          Por favor, informe a data de lançamento da música (formato:
+          DD/mm/AAAA).
         </div>
       </div>
 

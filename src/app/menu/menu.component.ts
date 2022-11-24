@@ -12,6 +12,7 @@ import { Constants } from 'src/app/util/constants';
 import { LoginService } from './../services/login.service';
 import { Subscription } from 'rxjs';
 import { WebStorageUtil } from 'src/app/util/web-storage-util';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,7 @@ import { WebStorageUtil } from 'src/app/util/web-storage-util';
 })
 export class MenuComponent implements OnInit, AfterViewInit {
   loggedIn = false;
+  user!: User;
   subscription!: Subscription;
 
   @ViewChild('mobile') sideNav?: ElementRef;
@@ -33,6 +35,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loggedIn = WebStorageUtil.get(Constants.LOGGED_IN_KEY) as boolean;
+    this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
     console.log('init - menu');
   }
 

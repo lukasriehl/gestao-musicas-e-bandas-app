@@ -10,6 +10,7 @@ import { MusicasComponent } from './musicas/musicas.component';
 import { BandasComponent } from './bandas/bandas.component';
 import { ManutMusicasComponent } from './manut-musicas/manut-musicas.component';
 import { ManutBandasComponent } from './manut-bandas/manut-bandas.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'manutBandas/:bandId', component: ManutBandasComponent },
   { path: 'manutMusicas', component: ManutMusicasComponent},
   { path: 'manutMusicas/:musicId', component: ManutMusicasComponent },
+  { path: 'playlist', component: PlaylistComponent},
+  { path: 'playlist/:playlistId', component: PlaylistComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NotAuthorizedComponent },
   { path: '**', component: PageNotFoundComponent }

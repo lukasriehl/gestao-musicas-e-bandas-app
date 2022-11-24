@@ -20,6 +20,7 @@ import { ManutMusicasComponent } from './manut-musicas/manut-musicas.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ModalComponent } from './modal/modal.component';
 import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.componen
     ManutMusicasComponent,
     NotAuthorizedComponent,
     ModalComponent,
-    PlaylistPanelComponent
+    PlaylistPanelComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.componen
     FormsModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
+  //providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
