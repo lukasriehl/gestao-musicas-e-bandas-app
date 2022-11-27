@@ -1,4 +1,4 @@
-import { Playlist } from './../model/playlist';
+import { Playlist, PlaylistDTO } from './../model/playlist';
 import { UserService } from './../services/user.service';
 import { PlaylistPanelComponent } from './../playlist-panel/playlist-panel.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +15,8 @@ import { Constants } from '../util/constants';
 export class HomeComponent implements OnInit {
   user!: User;
   imageURL: string = 'assets/resources/images/background_home.jpg';
-  playlists: Playlist[];
+  playlists!: PlaylistDTO[];
+  sessionUserId!: string;
 
   @ViewChild(PlaylistPanelComponent)
   playlistPanelComponent!: PlaylistPanelComponent;
@@ -28,7 +29,16 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(private userService: UserService) {
-    this.playlists = [];
+    Shared.initializeWebStorage();
+    this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
+
+    let sessionUserId = WebStorageUtil.get(Constants.SESSION_USER_ID);
+
+    console.log("Id do usuário logado: " + sessionUserId);
+
+    this.userService.getUserPlaylist(sessionUserId).then(p => {
+      this.playlists = p;
+    });
   }
 
   getBackgroundImage() {
@@ -40,28 +50,8 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-    Shared.initializeWebStorage();
-    this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
-
-    let sessionUserId = WebStorageUtil.get(Constants.SESSION_USER_ID);
-
-    console.log("Id do usuário logado: " + sessionUserId);
-
-    this.userService.listPlaylistsByUser(sessionUserId).subscribe(
-      (data: Playlist[]) => {
-        this.playlists = data;
-      },
-      (error) => {
-        console.log('componente');
-        console.log(error);
-        alert(error.message);
-      }
-    );
-
+   ngOnInit() {
     console.log('init - land-page');
-
-    console.log("Quantidade de playlists: " + this.playlists.length);
   }
 
   onPlaylistWarnEvent(event: boolean) {

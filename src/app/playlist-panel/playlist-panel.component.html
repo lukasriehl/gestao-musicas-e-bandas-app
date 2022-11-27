@@ -1,19 +1,39 @@
-<div class="row">
-  <div class="col s12 m6 offset-m3">
-    <cdk-accordion class="example-accordion">
-      <div *ngFor="let p of this.value">
-        <h3>
-          <a [title]="p.name" [routerLink]="['/playlists', p.id]">
-            {{ p.name }}
-          </a>
-        </h3>
-
+<cdk-accordion class="example-accordion">
+  <cdk-accordion-item
+    *ngFor="let p of this.value; let index = index"
+    #accordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-' + index"
+    [attr.aria-expanded]="accordionItem.expanded"
+    [attr.aria-controls]="'accordion-body-' + index"
+  >
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+      {{ p.name }}
+      <span class="example-accordion-item-description">
+        Clique para {{ accordionItem.expanded ? "fechar" : "abrir" }}
+      </span>
+      <a [title]="p.name" [routerLink]="['/playlist', p.id]">
+        <i class="material-icons right">send</i>
+      </a>
+    </div>
+    <div
+      class="example-accordion-item-body"
+      role="region"
+      [style.display]="accordionItem.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-' + index"
+      [attr.aria-labelledby]="'accordion-header-' + index"
+    >
+      <ul *ngIf="p.musics">
         <div *ngFor="let m of p.musics">
-          <p *ngIf="m.name">
-            <a href="{{ m.link }}" target="_blank">{{ m.name }}</a>
-          </p>
+          <li *ngIf="m.name">
+            <p>
+              <a href="{{ m.link }}" target="_blank">{{ m.name }}</a>
+            </p>
+          </li>
         </div>
-      </div>
-    </cdk-accordion>
-  </div>
-</div>
+      </ul>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>

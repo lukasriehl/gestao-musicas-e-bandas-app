@@ -11,7 +11,7 @@ import { MusicDTO } from './../model/music';
 export class MusicPromiseService {
   URL = Constants.HOST + '/musics';
   URL_PT = Constants.HOST + '/musicas';
-  URL_EXPAND_STYLES = Constants.HOST + '/musics?_expand=band';
+  URL_EXPAND_BANDS = Constants.HOST + '/musics?_expand=band';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': Constants.CONTENT_TYPE_JSON }),
@@ -24,7 +24,11 @@ export class MusicPromiseService {
   }
 
   listAllWithBand(): Promise<MusicDTO[]> {
-    return firstValueFrom(this.httpClient.get<MusicDTO[]>(`${this.URL_EXPAND_STYLES}`));
+    return firstValueFrom(this.httpClient.get<MusicDTO[]>(`${this.URL_EXPAND_BANDS}`));
+  }
+
+  listAllWithBandExpanded(): Promise<Music[]> {
+    return firstValueFrom(this.httpClient.get<Music[]>(`${this.URL_EXPAND_BANDS}`));
   }
 
   getById(id: number): Promise<Music> {

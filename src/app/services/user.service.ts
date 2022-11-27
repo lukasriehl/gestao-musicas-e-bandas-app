@@ -1,4 +1,4 @@
-import { Playlist } from './../model/playlist';
+import { Playlist, PlaylistDTO } from './../model/playlist';
 import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -29,9 +29,18 @@ export class UserService {
     );
   }
 
-  listPlaylistsByUser(id: string): Observable<Playlist[]> {
+  listPlaylistsByUser(id: string): Observable<PlaylistDTO[]> {
     return this.httpClient
-      .get<Playlist[]>(`${RoutesAPI.PLAYLISTS}?userId=${id}`)
-      .pipe(catchError(ErrorUtil.handleError));
+      .get<PlaylistDTO[]>(`${RoutesAPI.PLAYLISTS}?userId=${id}`)
+      .pipe(map((p) => !p ? [] : p));
+  }
+
+  async getUserPlaylist(sessionUserId: string): Promise<PlaylistDTO[]>{
+    return new Promise(resolve => {
+      this.listPlaylistsByUser(sessionUserId).subscribe({
+          next: (u) => resolve(u),
+          error: (e) => resolve([])
+      });
+    });
   }
 }

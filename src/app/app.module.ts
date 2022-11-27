@@ -1,7 +1,8 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -46,9 +47,11 @@ import { PlaylistComponent } from './playlist/playlist.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    CdkAccordionModule,
+    AgGridModule,
     NgxMaskModule.forRoot()
   ],
-  //providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
