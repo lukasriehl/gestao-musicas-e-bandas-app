@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Gestão de Músicas e Bandas App</title>
+    <base href="/gestao-musicas-e-bandas-app/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style type="text/css">
+      body,
+      html {
+        height: 100% !important;
+      }
+
+      .app-loading {
+        margin-top: 150px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      .app-loading .logo {
+        width: 150px;
+        height: 150px;
+        background: url(assets/resources/images/logo.png) center center
+          no-repeat;
+        background-size: cover;
+      }
+
+      .app-loading .spinner {
+        height: 200px;
+        width: 200px;
+        animation: rotate 2s linear infinite;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .app-loading .spinner .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: #dae3f4;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>
+  <style>html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}svg:not(:root){overflow:hidden}html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}html{line-height:1.5;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;font-weight:400;color:#000000de}@media only screen and (min-width: 0){html{font-size:14px}}@media only screen and (min-width: 992px){html{font-size:14.5px}}@media only screen and (min-width: 1200px){html{font-size:15px}}:root{--primaryColor:yellow}*{padding:0;margin:0;vertical-align:baseline;list-style:none;border:0}body,html{background-color:#ededed!important}</style><link rel="stylesheet" href="styles.e3e124091fd9114d.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.e3e124091fd9114d.css"></noscript></head>
+  <body>
+    <app-root>
+      <div class="app-loading">
+        <div class="logo"></div>
+        <svg class="spinner" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+        </svg>
+      </div>
+    </app-root>
+  <script src="runtime.f1ef3f65ad2217bf.js" type="module"></script><script src="polyfills.33b6f9bfa2cfa753.js" type="module"></script><script src="main.f0381c8fd9c6bb19.js" type="module"></script>
+
+</body></html>
