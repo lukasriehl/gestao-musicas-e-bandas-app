@@ -28,7 +28,7 @@ https://www.figma.com/file/UORysBBNn0rcgxRmQLGlNW/gestao-musicas-e-bandas?node-i
 - [x] Desabilitar o botão de submit enquanto o formulário está inválido.
 - [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
 - [x] Cadastrar uma entidade no JSON Server.
-- [ ] Apresentar uma lista de dados com a diretiva estrutural ngFor.
-- [ ] Usar a diretiva ngIf
-- [ ] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
+- [x] Usar a diretiva ngIf
+- [x] Formatar a apresentação de dados com Pipes.
+- [x] Build e deploy da aplicação.
