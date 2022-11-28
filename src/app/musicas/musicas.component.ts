@@ -60,11 +60,6 @@ export class MusicasComponent implements OnInit {
     }));
   }
 
-  //TODO: IMPLEMENTAR
-  onIncludeOnPlaylist(music: MusicDTO){
-
-  }
-
   exibirMusicas(){
     this.musicPromiseService.listAllWithBand()
     .then((m: MusicDTO[]) => {

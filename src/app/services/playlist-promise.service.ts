@@ -65,4 +65,44 @@ export class PlaylistPromiseService {
     );
   }
 
+  delete(id: number): Promise<boolean> {
+    const deletou = new Promise<boolean>((resolve, reject) => {
+      firstValueFrom (
+        this.httpClient
+        .delete<Playlist>(
+          `${this.URL}/${id}`)
+      )
+      .then( () => {
+          resolve(true);
+      })
+      .catch((e) => {
+        reject('Falha ao deletar playlist de ID ' + id + '!');
+      });
+    });
+
+    return deletou;
+  }
+
+  deleteByName(name: string): Promise<boolean> {
+    const deletou = new Promise<boolean>((resolve, reject) => {
+        this.getByName(name)
+        .then((p: Playlist[]) => {
+            let playlist = p[0];
+
+            this.delete(playlist.id)
+            .then((d: boolean) => {
+                resolve(d);
+            })
+            .catch((e) => {
+              reject('Falha ao deletar playlist com nome ' + playlist.name + ' !');
+            });
+        })
+        .catch((e) => {
+          reject('Nenhuma playlist com o nome ' + name + ' encontrada para remoção!');
+        });
+    });
+
+    return deletou;
+  }
+
 }

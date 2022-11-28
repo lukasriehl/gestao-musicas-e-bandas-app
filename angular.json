@@ -5,7 +5,11 @@
   "projects": {
     "gestao-musicas-e-bandas-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -36,7 +40,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -99,13 +103,11 @@
             ],
             "scripts": []
           }
+        },
+         "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
-    }
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "style": "scss"
     }
   },
   "cli": {

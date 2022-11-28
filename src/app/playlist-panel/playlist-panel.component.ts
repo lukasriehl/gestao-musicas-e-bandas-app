@@ -1,3 +1,4 @@
+import { PlaylistPromiseService } from './../services/playlist-promise.service';
 import {
   Component,
   EventEmitter,
@@ -21,8 +22,13 @@ export class PlaylistPanelComponent implements OnInit {
   @Output() playlistWarnEvent = new EventEmitter<boolean>();
   public user?: User;
 
+  isShowMessage: boolean = false;
+  isSuccess!: boolean;
+  message!: string;
 
-  constructor(private musicPromiseService: MusicPromiseService) {
+
+  constructor(private musicPromiseService: MusicPromiseService,
+    private playlistPromiseService: PlaylistPromiseService) {
   }
 
   ngOnInit(): void {
@@ -50,6 +56,20 @@ export class PlaylistPanelComponent implements OnInit {
         }
       }
     }
+  }
+
+  onDelete(name: string) {
+    let confirmation = window.confirm(
+      'Você tem certeza que deseja remover a playlist ' + name + '?'
+    );
+    if (!confirmation) {
+      return;
+    }
+    this.playlistPromiseService.deleteByName(name)
+    .then((d: boolean) => {
+      this.isSuccess = d;
+      this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+    })
   }
 
 }

@@ -1,3 +1,16 @@
+<div class="row">
+  <div class="col s12">
+    <div
+      id="msg-musicas"
+      class="card-panel white-text"
+      [class.red]="!this.isSuccess"
+      [class.blue]="this.isSuccess"
+      *ngIf="this.isShowMessage"
+    >
+      {{ this.message }}
+    </div>
+  </div>
+</div>
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item
     *ngFor="let p of this.value; let index = index"
@@ -17,6 +30,11 @@
       <a [title]="p.name" [routerLink]="['/playlist', p.id]">
         <i class="material-icons right">send</i>
       </a>
+      <a
+        ><i class="material-icons my-icon-size" (click)="onDelete(p.name)"
+          >delete</i
+        ></a
+      >
     </div>
     <div
       class="example-accordion-item-body"

@@ -101,15 +101,24 @@
     {
       "id": 1,
       "name": "Playlist de Rock do Lukas",
-      "userId": "986",
       "musics": [
         {
-          "id": "253"
-        },
-        {
-          "id": "553"
+          "id": 253,
+          "name": "Always",
+          "cdName": "Untitled",
+          "link": "https://www.youtube.com/watch?v=CvtJVku_mJw",
+          "releaseDate": "2013-10-01",
+          "bandId": "483",
+          "band": {
+            "name": "Blink 182",
+            "id": 483,
+            "musics": [],
+            "foundationDate": "1994-01-01",
+            "styleId": "1"
+          }
         }
-      ]
+      ],
+      "userId": "986"
     }
   ]
 }

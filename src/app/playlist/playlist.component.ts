@@ -60,13 +60,7 @@ export class PlaylistComponent implements OnInit {
     flex: 1,
     minWidth: 100,
   };
-  /*columnDefs = [{ field: "make" }, { field: "model" }, { field: "price" }];
 
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 }
-  ];*/
   public rowSelection: 'single' | 'multiple' = 'multiple';
   public rowData!: Music[];
   public preSelectedMusics!: Music[];
@@ -91,6 +85,7 @@ export class PlaylistComponent implements OnInit {
       .then((p: Playlist) => {
         this.playlist = Playlist.clone(p);
         this.preSelectedMusics = p.musics;
+        console.log("Quantidade de músicas existentes na playlist: " + this.preSelectedMusics.length);
       });
     }
   }
@@ -106,6 +101,8 @@ export class PlaylistComponent implements OnInit {
   }
 
   onSubmit() {
+    this.playlist.musics = this.getSelectedMusics();
+
     this.playlistPromiseService.findIdByName(this.playlist.name)
     .then((i: number) => {
       if(i >= 0){
