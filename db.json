@@ -99,8 +99,8 @@
   ],
   "playlists": [
     {
-      "id": 1,
-      "name": "Playlist de Rock do Lukas",
+      "id": 628,
+      "name": "Playlist 1",
       "musics": [
         {
           "id": 253,
@@ -117,8 +117,7 @@
             "styleId": "1"
           }
         }
-      ],
-      "userId": "986"
+      ]
     }
   ]
 }

@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     this.modal.show = event;
     this.modal.title = 'Aviso!';
     this.modal.text = `Você ainda não possui Playlists! Faça o cadastro!`;
-    this.modal.extraLink = 'playlists';
+    this.modal.extraLink = 'playlist';
   }
 
   onCloseModal() {

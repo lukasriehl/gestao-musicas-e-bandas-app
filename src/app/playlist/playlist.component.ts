@@ -1,7 +1,7 @@
 import { MusicPromiseService } from './../services/music-promise.service';
 import { Playlist } from './../model/playlist';
 import { Music } from '../model/music';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, LOCALE_ID, Inject } from '@angular/core';
 import { PlaylistPromiseService } from '../services/playlist-promise.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,7 @@ import {
   FirstDataRenderedEvent,
   GridReadyEvent,
 } from 'ag-grid-community';
+import { formatDate  } from '@angular/common';
 
 @Component({
   selector: 'app-playlist',
@@ -39,13 +40,15 @@ export class PlaylistComponent implements OnInit {
       checkboxSelection: (
         params: CheckboxSelectionCallbackParams<Music>
       ) => {
-        return !!params.data && params.data.name === 'Always';
+        return !!params.data && this.isMusicAlreadySelected(params.data.name);
       },
       showDisabledCheckboxes: true,
     },
     { field: 'releaseDate',
-      headerName: 'Data de Lançamento'
-    },
+      headerName: 'Data de Lançamento',
+      cellRenderer: (data: { value: any; }) => {
+        return  formatDate(data.value, 'dd/MM/yyyy', this.locale);
+      }},
     { field: 'cdName',
       headerName: 'Nome do CD',
       maxWidth: 300 },
@@ -66,7 +69,7 @@ export class PlaylistComponent implements OnInit {
   public preSelectedMusics!: Music[];
 
   constructor(private route: ActivatedRoute, private playlistPromiseService: PlaylistPromiseService,
-    private musicPromiseService: MusicPromiseService) {
+    private musicPromiseService: MusicPromiseService, @Inject(LOCALE_ID) private locale: string) {
     this.playlist = new Playlist('');
     this.preSelectedMusics = [];
     this.isUpdate = false;
@@ -92,7 +95,7 @@ export class PlaylistComponent implements OnInit {
 
   onFirstDataRendered(params: FirstDataRenderedEvent<Music>) {
     params.api.forEachNode((node) =>
-      node.setSelected(!!node.data && this.isMusicAlreadySelected(node.data.id))
+      node.setSelected(!!node.data && this.isMusicAlreadySelected(node.data.name))
     );
   }
 
@@ -151,14 +154,14 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
-  isMusicAlreadySelected(id: number): boolean{
+  isMusicAlreadySelected(name: string): boolean{
     if(!!this.preSelectedMusics && this.preSelectedMusics.length > 0){
       for (let i = 0; i < this.preSelectedMusics.length; i++){
-        if(this.preSelectedMusics[i].id === id){
+        if(this.preSelectedMusics[i].name === name){
           return true;
         }
       }
-    }
+  }
 
     return false;
   }

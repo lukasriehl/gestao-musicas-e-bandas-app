@@ -70,6 +70,14 @@ export class PlaylistPanelComponent implements OnInit {
       this.isSuccess = d;
       this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
     })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+      }, 700);
+    }));
   }
 
 }
