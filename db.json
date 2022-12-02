@@ -43,6 +43,13 @@
       "musics": [],
       "foundationDate": "1962-01-27",
       "styleId": "1"
+    },
+    {
+      "name": "Forfun",
+      "id": 885,
+      "musics": [],
+      "foundationDate": "2000-01-01",
+      "styleId": "1"
     }
   ],
   "musics": [
@@ -61,6 +68,14 @@
       "link": "https://www.youtube.com/watch?v=1M4ADcMn3dA&list=RDMM&index=3",
       "releaseDate": "1997-01-01T00:12:50.798Z",
       "bandId": "813"
+    },
+    {
+      "id": 154,
+      "name": "Forever",
+      "cdName": "Hot for shadow",
+      "link": "https://www.youtube.com/watch?v=d_RKO5ozLVo&list=RDMM&index=27",
+      "releaseDate": "2022-08-01",
+      "bandId": "779"
     }
   ],
   "styles": [
@@ -99,8 +114,9 @@
   ],
   "playlists": [
     {
-      "id": 628,
-      "name": "Playlist 1",
+      "id": 513,
+      "name": "Praylist Brink 182",
+      "userId": 986,
       "musics": [
         {
           "id": 253,

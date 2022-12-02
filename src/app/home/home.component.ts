@@ -1,4 +1,4 @@
-import { Playlist, PlaylistDTO } from './../model/playlist';
+import { PlaylistDTO } from './../model/playlist';
 import { UserService } from './../services/user.service';
 import { PlaylistPanelComponent } from './../playlist-panel/playlist-panel.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -6,6 +6,7 @@ import { User } from '../model/user';
 import { Shared } from '../util/shared';
 import { WebStorageUtil } from '../util/web-storage-util';
 import { Constants } from '../util/constants';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   imageURL: string = 'assets/resources/images/background_home.jpg';
   playlists!: PlaylistDTO[];
   sessionUserId!: string;
+  subscription!: Subscription;
 
   @ViewChild(PlaylistPanelComponent)
   playlistPanelComponent!: PlaylistPanelComponent;

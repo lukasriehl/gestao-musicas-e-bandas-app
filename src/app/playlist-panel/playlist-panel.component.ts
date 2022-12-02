@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { User } from '../model/user';
-import { PlaylistDTO } from './../model/playlist';
+import { Playlist, PlaylistDTO } from './../model/playlist';
 import { MusicPromiseService } from '../services/music-promise.service';
 import { Music } from '../model/music';
 
@@ -20,12 +20,14 @@ import { Music } from '../model/music';
 export class PlaylistPanelComponent implements OnInit {
   @Input() value: PlaylistDTO[] = [];
   @Output() playlistWarnEvent = new EventEmitter<boolean>();
+  @Output() playlistUpdateEvent = new EventEmitter<PlaylistDTO[]>();
   public user?: User;
 
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
+  //subscription: Subscription;
 
   constructor(private musicPromiseService: MusicPromiseService,
     private playlistPromiseService: PlaylistPromiseService) {
@@ -59,16 +61,24 @@ export class PlaylistPanelComponent implements OnInit {
   }
 
   onDelete(name: string) {
+    let userId = "-1";
+
     let confirmation = window.confirm(
       'Você tem certeza que deseja remover a playlist ' + name + '?'
     );
+
     if (!confirmation) {
       return;
     }
-    this.playlistPromiseService.deleteByName(name)
-    .then((d: boolean) => {
-      this.isSuccess = d;
-      this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+    this.playlistPromiseService.getByName(name)
+    .then((p: Playlist[]) => {
+        userId = p[0].userId;
+
+        this.playlistPromiseService.delete(p[0].id)
+        .then((d: boolean) => {
+          this.isSuccess = d;
+          this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+        })
     })
     .finally(() => {
       this.isShowMessage = true;
@@ -77,7 +87,20 @@ export class PlaylistPanelComponent implements OnInit {
       setTimeout(() => {
         this.isShowMessage = false;
       }, 700);
-    }));
+    }))
+    .then(() => {
+      setTimeout(() => {
+        console.log("User id: " + userId);
+        this.playlistPromiseService.getByUserId(userId)
+        .then((p: PlaylistDTO[]) => {
+          //this.value = p;
+
+          console.log("playlist restantes: " + p.length);
+
+          this.playlistUpdateEvent.emit(p);
+        });
+      }, 300);
+    });
   }
 
 }

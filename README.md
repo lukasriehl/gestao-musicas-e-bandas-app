@@ -6,7 +6,7 @@ O frontend da aplicação foi desenvolvido com Angular e o backend foi simulado 
 
 # Endereço de Deploy - GitHub Pages
 
-- A definir
+- https://lukasriehl.github.io/gestao-musicas-e-bandas-app
 
 # Protótipo
 

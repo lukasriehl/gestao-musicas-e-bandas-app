@@ -14,6 +14,7 @@
       #playlist
       [value]="this.playlists"
       (playlistWarnEvent)="this.onPlaylistWarnEvent($event)"
+      (playlistUpdateEvent)="this.playlists = $event"
     ></app-playlist-panel>
 
     <div class="row" style="margin-top: 50px">

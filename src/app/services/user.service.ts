@@ -2,7 +2,7 @@ import { Playlist, PlaylistDTO } from './../model/playlist';
 import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { RoutesAPI } from '../util/routes-api';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorUtil } from './../util/error-util';
@@ -12,7 +12,6 @@ import { User } from '../model/user';
   providedIn: 'root',
 })
 export class UserService {
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': Constants.CONTENT_TYPE_JSON }),
   };

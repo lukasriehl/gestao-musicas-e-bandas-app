@@ -12,7 +12,9 @@ import {
   FirstDataRenderedEvent,
   GridReadyEvent,
 } from 'ag-grid-community';
-import { formatDate  } from '@angular/common';
+import { Shared } from '../util/shared';
+import { WebStorageUtil } from '../util/web-storage-util';
+import { Constants } from '../util/constants';
 
 @Component({
   selector: 'app-playlist',
@@ -25,6 +27,8 @@ export class PlaylistComponent implements OnInit {
 
   playlist: Playlist;
 
+  sessionUserId!: string;
+
   isUpdate: boolean;
 
   isShowMessage: boolean = false;
@@ -36,7 +40,6 @@ export class PlaylistComponent implements OnInit {
       field: 'name',
       headerName: 'Nome',
       headerCheckboxSelection: true,
-      maxWidth: 300,
       checkboxSelection: (
         params: CheckboxSelectionCallbackParams<Music>
       ) => {
@@ -44,24 +47,16 @@ export class PlaylistComponent implements OnInit {
       },
       showDisabledCheckboxes: true,
     },
-    { field: 'releaseDate',
-      headerName: 'Data de Lançamento',
-      cellRenderer: (data: { value: any; }) => {
-        return  formatDate(data.value, 'dd/MM/yyyy', this.locale);
-      }},
     { field: 'cdName',
-      headerName: 'Nome do CD',
-      maxWidth: 300 },
+      headerName: 'Nome do CD'},
+    { field: 'band.name',
+      headerName: 'Banda'},
     { field: 'link',
       headerName: 'Link',
-      maxWidth: 300 },
-    { field: 'band.name',
-      headerName: 'Banda',
-      maxWidth: 300 },
+      minWidth: 600 },
   ];
   public defaultColDef: ColDef = {
-    flex: 1,
-    minWidth: 100,
+    resizable: true
   };
 
   public rowSelection: 'single' | 'multiple' = 'multiple';
@@ -76,6 +71,10 @@ export class PlaylistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Shared.initializeWebStorage();
+
+    this.sessionUserId = WebStorageUtil.get(Constants.SESSION_USER_ID);
+
     const routeParams = this.route.snapshot.paramMap;
     const playlistId = Number(routeParams.get('playlistId'));
 
@@ -105,6 +104,13 @@ export class PlaylistComponent implements OnInit {
 
   onSubmit() {
     this.playlist.musics = this.getSelectedMusics();
+    this.playlist.userId = this.sessionUserId;
+
+    if(this.playlist.musics.length == 0){
+      window.alert('Selecione ao menos 1 música para a playlist!');
+
+      return;
+    }
 
     this.playlistPromiseService.findIdByName(this.playlist.name)
     .then((i: number) => {

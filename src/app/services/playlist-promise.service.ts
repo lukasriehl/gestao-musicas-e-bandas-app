@@ -1,8 +1,8 @@
-import { Playlist } from './../model/playlist';
+import { Playlist, PlaylistDTO } from './../model/playlist';
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {firstValueFrom} from 'rxjs';
+import {BehaviorSubject, firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,11 @@ export class PlaylistPromiseService {
     headers: new HttpHeaders({ 'Content-Type': Constants.CONTENT_TYPE_JSON }),
   };
 
-  constructor(private httpClient: HttpClient) {}
+  private playlistSource!: BehaviorSubject<PlaylistDTO[]>;
+
+  constructor(private httpClient: HttpClient) {
+    this.playlistSource = new BehaviorSubject<PlaylistDTO[]>([]);
+  }
 
   getAll(): Promise<Playlist[]> {
     return firstValueFrom(this.httpClient.get<Playlist[]>(`${this.URL}`));
@@ -26,6 +30,10 @@ export class PlaylistPromiseService {
 
   getByName(name: string): Promise<Playlist[]> {
     return firstValueFrom(this.httpClient.get<Playlist[]>(`${this.URL}?name=${name}`));
+  }
+
+  getByUserId(userId: String): Promise<PlaylistDTO[]> {
+    return firstValueFrom(this.httpClient.get<PlaylistDTO[]>(`${this.URL}?userId=${userId}`));
   }
 
   findIdByName(name: string): Promise<number> {
