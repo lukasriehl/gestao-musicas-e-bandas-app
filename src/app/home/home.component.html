@@ -4,14 +4,29 @@
 <div
   class="intro blue z-depth-1 my-logo-text"
   [ngStyle]="this.getBackgroundImage()"
+  style="padding: 10px"
 >
-  <h1 class="grey-text text-lighten-5">GESTÃO DE MÚSICAS E BANDAS</h1>
+  <h2 class="grey-text text-lighten-5">GESTÃO DE MÚSICAS E BANDAS</h2>
 
   <div class="container">
     <app-playlist-panel
+      *ngIf="this.playlists"
       #playlist
-      [value]="this.user.playlist"
+      [value]="this.playlists"
       (playlistWarnEvent)="this.onPlaylistWarnEvent($event)"
+      (playlistUpdateEvent)="this.playlists = $event"
     ></app-playlist-panel>
+
+    <div class="row" style="margin-top: 50px">
+      <div class="col s12 m6 offset-m3">
+        <button
+          class="btn waves-effect waves-light green darken-4"
+          [routerLink]="['/playlist']"
+        >
+          Nova Playlist
+          <i class="material-icons add">add</i>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

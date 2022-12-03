@@ -1,9 +1,12 @@
+import { PlaylistDTO } from './../model/playlist';
+import { UserService } from './../services/user.service';
 import { PlaylistPanelComponent } from './../playlist-panel/playlist-panel.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../model/user';
 import { Shared } from '../util/shared';
 import { WebStorageUtil } from '../util/web-storage-util';
 import { Constants } from '../util/constants';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +16,9 @@ import { Constants } from '../util/constants';
 export class HomeComponent implements OnInit {
   user!: User;
   imageURL: string = 'assets/resources/images/background_home.jpg';
+  playlists!: PlaylistDTO[];
+  sessionUserId!: string;
+  subscription!: Subscription;
 
   @ViewChild(PlaylistPanelComponent)
   playlistPanelComponent!: PlaylistPanelComponent;
@@ -24,7 +30,18 @@ export class HomeComponent implements OnInit {
     extraLink: '',
   };
 
-  constructor() { }
+  constructor(private userService: UserService) {
+    Shared.initializeWebStorage();
+    this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
+
+    let sessionUserId = WebStorageUtil.get(Constants.SESSION_USER_ID);
+
+    console.log("Id do usuário logado: " + sessionUserId);
+
+    this.userService.getUserPlaylist(sessionUserId).then(p => {
+      this.playlists = p;
+    });
+  }
 
   getBackgroundImage() {
     return {
@@ -35,17 +52,15 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-    Shared.initializeWebStorage();
-    this.user = WebStorageUtil.get(Constants.USERNAME_KEY);
+   ngOnInit() {
     console.log('init - land-page');
   }
 
   onPlaylistWarnEvent(event: boolean) {
     this.modal.show = event;
     this.modal.title = 'Aviso!';
-    this.modal.text = `Você ainda não possui músicas cadastradas em sua Playlist! Faça o cadastro!`;
-    this.modal.extraLink = 'manutMusicas';
+    this.modal.text = `Você ainda não possui Playlists! Faça o cadastro!`;
+    this.modal.extraLink = 'playlist';
   }
 
   onCloseModal() {

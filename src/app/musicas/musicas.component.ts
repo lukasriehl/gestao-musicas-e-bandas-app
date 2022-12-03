@@ -1,5 +1,6 @@
+import { MusicPromiseService } from './../services/music-promise.service';
 import { Music } from './../model/music';
-import { MusicService } from './../services/music.service';
+import { MusicDTO } from './../model/music';
 import { Component, OnInit } from '@angular/core';
 import { Shared } from '../util/shared';
 
@@ -9,17 +10,18 @@ import { Shared } from '../util/shared';
   styleUrls: ['./musicas.component.css']
 })
 export class MusicasComponent implements OnInit {
-  musics?: Music[];
+  musics?: MusicDTO[];
 
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicPromiseService: MusicPromiseService) { }
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
-    this.musics = this.musicService.getMusics();
+
+    this.exibirMusicas();
   }
 
   onDelete(name: string) {
@@ -29,19 +31,45 @@ export class MusicasComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.musicService.delete(name);
-    this.isShowMessage = true;
-    this.isSuccess = response;
-    if (response) {
-      this.message = 'O item foi removido com sucesso!';
-    } else {
+    this.musicPromiseService.deleteByName(name)
+    .then((d: boolean) => {
+      this.isSuccess = d;
+      this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+    }).then( () => {
+      this.musicPromiseService.listAllWithBand()
+      .then((m: MusicDTO[]) => {
+        this.musics = m;
+      })
+      .catch((e) => {
+        this.isShowMessage = true;
+        this.isSuccess = false;
+        this.message = 'Falha ao exibir as músicas cadastradas!';
+      })
+    })
+    .catch((e) => {
+      this.isSuccess = false;
       this.message = 'Opps! O item não pode ser removido!';
-    }
-    this.musics = this.musicService.getMusics();
+    })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+      }, 700);
+    }));
   }
 
-  onIncludeOnPlaylist(music: Music){
-
+  exibirMusicas(){
+    this.musicPromiseService.listAllWithBand()
+    .then((m: MusicDTO[]) => {
+      this.musics = m;
+    })
+    .catch((e) => {
+      this.isShowMessage = true;
+      this.isSuccess = false;
+      this.message = 'Falha ao exibir as músicas cadastradas!';
+    });
   }
 
 }

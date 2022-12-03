@@ -6,7 +6,7 @@ O frontend da aplicação foi desenvolvido com Angular e o backend foi simulado 
 
 # Endereço de Deploy - GitHub Pages
 
-- A definir
+- https://lukasriehl.github.io/gestao-musicas-e-bandas-app
 
 # Protótipo
 
@@ -26,9 +26,9 @@ https://www.figma.com/file/UORysBBNn0rcgxRmQLGlNW/gestao-musicas-e-bandas?node-i
 - [x] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas.
 - [x] Validar campos do formulário com REGEX e apresentar os erros.
 - [x] Desabilitar o botão de submit enquanto o formulário está inválido.
-- [ ] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
-- [ ] Cadastrar uma entidade no JSON Server.
-- [ ] Apresentar uma lista de dados com a diretiva estrutural ngFor.
-- [ ] Usar a diretiva ngIf
-- [ ] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
+- [x] Cadastrar uma entidade no JSON Server.
+- [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
+- [x] Usar a diretiva ngIf
+- [x] Formatar a apresentação de dados com Pipes.
+- [x] Build e deploy da aplicação.

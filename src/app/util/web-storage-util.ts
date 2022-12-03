@@ -1,5 +1,3 @@
-import { User } from './../model/user';
-
 export class WebStorageUtil {
   static get(key: string): any {
     return JSON.parse(localStorage.getItem(key)!);
@@ -28,5 +26,9 @@ export class WebStorageUtil {
 
   static sequenceId(key: string) {
     return this.getArray(key).length;
+  }
+
+  static remove(key: string){
+    localStorage.removeItem(key);
   }
 }

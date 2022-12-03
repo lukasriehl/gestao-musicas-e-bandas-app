@@ -35,24 +35,23 @@
 
       <div class="input-field col s12">
         <input
-          id="input-foundationyear"
-          name="input-foundationyear"
-          placeholder="Ano de fundação"
-          type="text"
+          id="input-foundationdate"
+          name="input-foundationdate"
+          placeholder="Data de fundação"
+          type="date"
           class="validate"
-          [(ngModel)]="this.band.foundationYear"
-          pattern="^\d{4}$"
-          #foundationYear="ngModel"
+          [(ngModel)]="this.band.foundationDate"
+          #foundationDate="ngModel"
           required
         />
-        <label for="input-foundationyear" class="active"
-          >Ano de Fundação *</label
+        <label for="input-foundationdate" class="active"
+          >Data de Fundação *</label
         >
         <div
           class="red-text"
-          [hidden]="foundationYear.valid || foundationYear.untouched"
+          [hidden]="foundationDate.valid || foundationDate.untouched"
         >
-          Por favor, informe o ano de fundação da banda (4 algarismos).
+          Por favor, informe a data de fundação da banda (formato: DD/mm/AAAA).
         </div>
       </div>
 
@@ -63,7 +62,7 @@
             id="select-style"
             name="select-style"
             [compareWith]="this.compareStyles"
-            [(ngModel)]="this.band.style"
+            [(ngModel)]="this.selStyle"
             #style="ngModel"
             #styleSelect
             required

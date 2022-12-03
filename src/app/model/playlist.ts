@@ -10,4 +10,17 @@ export class Playlist {
     this.name = name;
     this.musics = [];
   }
+
+  public static clone(playlist: Playlist) {
+    let p: Playlist = new Playlist(playlist.name);
+    p.id = playlist.id;
+    p.userId = playlist.userId;
+    p.musics = playlist.musics;
+    return p;
+  }
+}
+export interface PlaylistDTO {
+  id: number;
+  name: string;
+  musics: Music[];
 }

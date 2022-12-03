@@ -1,3 +1,13 @@
 .my-logo {
   height: 64px;
 }
+@media screen and (max-width: 490px) {
+  .logged-user-span{
+    display: none;
+  }
+}
+@media screen and (min-width: 491px) {
+  .logged-user-span{
+    width: 30vh;
+  }
+}

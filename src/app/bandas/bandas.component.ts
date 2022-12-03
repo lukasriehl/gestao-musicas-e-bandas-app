@@ -1,7 +1,7 @@
-import { BandService } from './../services/band.service';
+import { BandPromiseService } from './../services/band-promise.service';
 import { Component, OnInit } from '@angular/core';
 import { Shared } from '../util/shared';
-import { Band } from '../model/band';
+import { BandDTO } from '../model/band';
 
 @Component({
   selector: 'app-bandas',
@@ -9,17 +9,18 @@ import { Band } from '../model/band';
   styleUrls: ['./bandas.component.css']
 })
 export class BandasComponent implements OnInit {
-  bands?: Band[];
+  bands?: BandDTO[];
 
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private bandService: BandService) { }
+  constructor(private bandPromiseService: BandPromiseService) { }
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
-    this.bands = this.bandService.getBands();
+
+    this.showBands();
   }
 
   onDelete(name: string) {
@@ -29,15 +30,46 @@ export class BandasComponent implements OnInit {
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.bandService.delete(name);
-    this.isShowMessage = true;
-    this.isSuccess = response;
-    if (response) {
-      this.message = 'O item foi removido com sucesso!';
-    } else {
+
+    this.bandPromiseService.deleteByName(name)
+    .then((d: boolean) => {
+      this.isSuccess = d;
+      this.message = d ? 'O item foi removido com sucesso!' : 'Opps! O item não pode ser removido!';
+    }).then( () => {
+      this.bandPromiseService.listAllWithStyle()
+      .then((b: BandDTO[]) => {
+        this.bands = b;
+      })
+      .catch((e) => {
+        this.isShowMessage = true;
+        this.isSuccess = false;
+        this.message = 'Falha ao exibir as bandas cadastradas!';
+      })
+    })
+    .catch((e) => {
+      this.isSuccess = false;
       this.message = 'Opps! O item não pode ser removido!';
-    }
-    this.bands = this.bandService.getBands();
+    })
+    .finally(() => {
+      this.isShowMessage = true;
+    })
+    .then((() => {
+      setTimeout(() => {
+        this.isShowMessage = false;
+      }, 700);
+    }));
+  }
+
+  showBands(){
+    this.bandPromiseService.listAllWithStyle()
+    .then((b: BandDTO[]) => {
+      this.bands = b;
+    })
+    .catch((e) => {
+      this.isShowMessage = true;
+      this.isSuccess = false;
+      this.message = 'Falha ao exibir as bandas cadastradas!';
+    });
   }
 
 }

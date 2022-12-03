@@ -1,0 +1,63 @@
+<div class="container contact">
+  <h5>Cadastro de Playlists</h5>
+  <hr />
+  <div class="row">
+    <div class="col s12">
+      <div
+        id="msg-login"
+        class="card-panel white-text"
+        [class.red]="!this.isSuccess"
+        [class.blue]="this.isSuccess"
+        *ngIf="this.isShowMessage"
+      >
+        {{ this.message }}
+      </div>
+    </div>
+    <form class="col s12" #form="ngForm" (submit)="onSubmit()">
+      <div class="input-field col s12">
+        <input
+          id="input-name"
+          name="input-name"
+          placeholder="Nome"
+          type="text"
+          class="validate"
+          [(ngModel)]="this.playlist.name"
+          pattern="[A-Za-z0-9\s]+"
+          #name="ngModel"
+          required
+        />
+        <label for="input-name" class="active">Nome *</label>
+        <div class="red-text" [hidden]="name.valid || name.untouched">
+          Por favor, informe o nome da playlist.
+        </div>
+      </div>
+
+      <div class="input-field col s12">
+        <h5>Seleção de Músicas</h5>
+
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%; height: 400px; overflow: scroll"
+          class="ag-theme-alpine"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [rowSelection]="rowSelection"
+          [rowMultiSelectWithClick]="true"
+          [debounceVerticalScrollbar]="true"
+          [rowData]="rowData"
+          (firstDataRendered)="onFirstDataRendered($event)"
+          (gridReady)="onGridReady($event)"
+        ></ag-grid-angular>
+      </div>
+
+      <button
+        class="btn waves-effect waves-light blue darken-4"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Salvar
+        <i class="material-icons save">save</i>
+      </button>
+    </form>
+  </div>
+</div>

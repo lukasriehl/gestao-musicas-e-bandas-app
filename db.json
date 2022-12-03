@@ -1,16 +1,154 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 986,
+      "name": "Lukas Riehl",
       "username": "lukas.riehl",
       "password": "qwerty",
       "isAdmin": true
+    }
+  ],
+  "bands": [
+    {
+      "name": "Kiss",
+      "id": 779,
+      "musics": [],
+      "foundationDate": "1974-01-01",
+      "styleId": "1"
     },
     {
-      "id": "2",
-      "username": "renato.riehl",
-      "password": "qwerty",
-      "isAdmin": false
+      "name": "Blink 182",
+      "id": 483,
+      "musics": [],
+      "foundationDate": "1994-01-01",
+      "styleId": "1"
+    },
+    {
+      "name": "Deep Purple",
+      "id": 291,
+      "musics": [],
+      "foundationDate": "1970-01-01",
+      "styleId": "1"
+    },
+    {
+      "name": "Ramnstein",
+      "id": 813,
+      "musics": [],
+      "foundationDate": "1994-01-01",
+      "styleId": "1"
+    },
+    {
+      "name": "The Doors",
+      "id": 640,
+      "musics": [],
+      "foundationDate": "1962-01-27",
+      "styleId": "1"
+    },
+    {
+      "name": "Forfun",
+      "id": 885,
+      "musics": [],
+      "foundationDate": "2000-01-01",
+      "styleId": "1"
+    },
+    {
+      "name": "Korn",
+      "id": 860,
+      "musics": [],
+      "foundationDate": "2000-01-01",
+      "styleId": "1"
+    }
+  ],
+  "musics": [
+    {
+      "id": 253,
+      "name": "Always",
+      "cdName": "Untitled",
+      "link": "https://www.youtube.com/watch?v=CvtJVku_mJw",
+      "releaseDate": "2013-10-01",
+      "bandId": "483"
+    },
+    {
+      "id": 553,
+      "name": "Keine Lust",
+      "cdName": "Reise Reise",
+      "link": "https://www.youtube.com/watch?v=1M4ADcMn3dA&list=RDMM&index=3",
+      "releaseDate": "1997-01-01T00:12:50.798Z",
+      "bandId": "813"
+    },
+    {
+      "id": 154,
+      "name": "Forever",
+      "cdName": "Hot for shadow",
+      "link": "https://www.youtube.com/watch?v=d_RKO5ozLVo&list=RDMM&index=27",
+      "releaseDate": "2022-08-01",
+      "bandId": "779"
+    },
+    {
+      "id": 820,
+      "name": "Freak on the leash",
+      "cdName": "SLA",
+      "link": "https://www.youtube.com/watch?v=jRGrNDV2mKc",
+      "releaseDate": "2001-01-01",
+      "bandId": "860"
+    }
+  ],
+  "styles": [
+    {
+      "id": 1,
+      "name": "Rock'n'Roll"
+    },
+    {
+      "id": 2,
+      "name": "Hip Hop"
+    },
+    {
+      "id": 3,
+      "name": "Rap"
+    },
+    {
+      "id": 4,
+      "name": "Reggae"
+    },
+    {
+      "id": 5,
+      "name": "Samba"
+    },
+    {
+      "id": 6,
+      "name": "Pagode"
+    },
+    {
+      "id": 7,
+      "name": "Clássica"
+    },
+    {
+      "id": 8,
+      "name": "Outro"
+    }
+  ],
+  "playlists": [
+    {
+      "id": 513,
+      "name": "Praylist Brink 182",
+      "userId": 986,
+      "musics": [
+        {
+          "id": 253,
+          "name": "Always",
+          "cdName": "Untitled",
+          "link": "https://www.youtube.com/watch?v=CvtJVku_mJw",
+          "releaseDate": "2013-10-01",
+          "bandId": "483",
+          "band": {
+            "name": "Blink 182",
+            "id": 483,
+            "musics": [],
+            "foundationDate": "1994-01-01",
+            "styleId": "1"
+          }
+        }
+      ]
     }
   ]
 }

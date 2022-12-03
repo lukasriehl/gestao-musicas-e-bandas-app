@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
-
+import { NgxMaskModule } from 'ngx-mask';
+import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { ManutMusicasComponent } from './manut-musicas/manut-musicas.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ModalComponent } from './modal/modal.component';
 import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.componen
     ManutMusicasComponent,
     NotAuthorizedComponent,
     ModalComponent,
-    PlaylistPanelComponent
+    PlaylistPanelComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +47,11 @@ import { PlaylistPanelComponent } from './playlist-panel/playlist-panel.componen
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    CdkAccordionModule,
+    AgGridModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

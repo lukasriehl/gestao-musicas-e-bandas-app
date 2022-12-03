@@ -1,0 +1,19 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../roubank-app"
+	},
+	{
+		"path": "../angular-bootstrap-example"
+	},
+	{
+		"path": "../../projetosJs/product_store"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "roubank-app"
+  }
+}
