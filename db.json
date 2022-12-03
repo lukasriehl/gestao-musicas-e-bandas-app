@@ -50,6 +50,13 @@
       "musics": [],
       "foundationDate": "2000-01-01",
       "styleId": "1"
+    },
+    {
+      "name": "Korn",
+      "id": 860,
+      "musics": [],
+      "foundationDate": "2000-01-01",
+      "styleId": "1"
     }
   ],
   "musics": [
@@ -76,6 +83,14 @@
       "link": "https://www.youtube.com/watch?v=d_RKO5ozLVo&list=RDMM&index=27",
       "releaseDate": "2022-08-01",
       "bandId": "779"
+    },
+    {
+      "id": 820,
+      "name": "Freak on the leash",
+      "cdName": "SLA",
+      "link": "https://www.youtube.com/watch?v=jRGrNDV2mKc",
+      "releaseDate": "2001-01-01",
+      "bandId": "860"
     }
   ],
   "styles": [

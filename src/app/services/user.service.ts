@@ -1,4 +1,4 @@
-import { Playlist, PlaylistDTO } from './../model/playlist';
+import { PlaylistDTO } from './../model/playlist';
 import { Constants } from 'src/app/util/constants';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
